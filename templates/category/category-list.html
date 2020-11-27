@@ -1,0 +1,26 @@
+{% extends 'shared/site.html' %}
+{% load static %}
+
+{% block site_content %}
+    <h1 id="category" class="">Categories</h1>
+    <a href="{% url 'create category'%}">Add new Category</a>
+    <div id="menu" class="">
+        {% if categories %}
+            <table>
+                <tr>
+                    <th>Category name</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+
+                {% for category in categories %}
+                    <tr>
+                        <th class="">{{ category.category_name }}</th>
+                        <th><a href="{% url 'edit category' category.category_id %}">Edit</a></th>
+                        <th><a href="{% url 'delete category' category.category_id %}">Delete</a></th>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}

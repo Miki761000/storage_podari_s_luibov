@@ -1,0 +1,36 @@
+{% extends 'shared/site.html' %}
+{% load static %}
+
+{% block site_content %}
+    <h1 class="text-center">Add new Product</h1>
+    <div class="row">
+        <div class="col-lg-6">
+            <form action="{% url 'create product' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ form.product_type.label }}
+                {{ form.product_type }}
+                {{ form.product_type.errors }}
+
+                {{ form.product_code.label }}
+                {{ form.product_code }}
+                {{ form.product_code.errors }}
+
+                {{ form.product_name.label }}
+                {{ form.product_name }}
+                {{ form.product_name.errors }}
+
+                {{ form.product_description.label }}
+                {{ form.product_description }}
+                {{ form.product_description.errors }}
+
+                {{ form.product_image.label }}
+                {{ form.product_image }}
+                {{ form.product_image.errors }}
+
+
+                <button class="btn btn-primary mt-2" type="submit">Create</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

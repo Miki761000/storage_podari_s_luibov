@@ -1,0 +1,44 @@
+{% extends 'shared/site.html' %}
+{% load static %}
+
+{% block site_content %}
+    <h1 id="category" class="">Products</h1>
+    <div id="menu" class="">
+        <a href="{% url 'create product' %}">Add new Product</a>
+        <a href="{% url 'list product' %}">All Products</a>
+
+        {#        <form type="get" action="." style="margin: 0">#}
+        {#            <input id="search_box" type="text" name="search_box" placeholder="Search...">#}
+        {#            <button id="search_submit" type="submit">Submit</button>#}
+        {#        </form>#}
+
+        <form method="get" action="{% url 'list product' %}">
+            {{ filter_form }}
+            {% csrf_token %}
+            <button>Filter</button>
+        </form>
+
+        {% if not products %}
+            <p>No products</p>
+        {% else %}
+            {% csrf_token %}
+            <ul>
+                {% for product in products %}
+                    <li>
+                        {{ product.product_type }}
+                        {{ product.product_code }}
+                        {{ product.product_name }}
+                        <img class="card-img-top" src="{{ product.product_image.url }}"
+                             alt="{{ product.product_name }}">
+                        {#                        <img class="card-img-top" src="{% url 'public file' product.product_image.url %}"#}
+                        {#                             alt="{{ product.product_name }}">#}
+                        <a href="{% url 'add quantity product' product.product_id %}">Add Quantity</a>
+                        <a href="{% url 'details product' product.product_id %}">Details</a>
+                        <a href="{% url 'edit product' product.product_id %}">Edit</a>
+                        <a href="{% url 'delete product' product.product_id %}">Delete</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

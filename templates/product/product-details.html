@@ -1,0 +1,29 @@
+{% extends 'shared/site.html' %}
+{% load static %}
+
+{% block site_content %}
+    <h1>{{ product.product_name }}</h1>
+    <div class="items-container">
+        <div class="item">
+            <div class="recipe-info-full">
+                {{ product.product_type }}
+                {{ product.product_code }}
+                {{ product.product_name }}
+                {{ product.product_description }}
+                <img class="card-img-top" src="{{ product.product_image.url }}"
+                     alt="{{ product.product_name }}">
+                {{ product.product_quantity }}
+                {{ product.product_delivery_price }}
+            </div>
+            <div class="content">
+                <div class="buttons-container">
+                    <a class="button edit" href="{% url 'list product' %}">All Products</a>
+                    <a class="button edit" href="{% url 'edit product' product.product_id %}">Edit</a>
+                    <a class="button delete" href="{% url 'delete product' product.product_id %}">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+{% endblock %}
