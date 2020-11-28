@@ -35,12 +35,10 @@ class Product(models.Model):
     product_delivery_price = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)  # calculation field
     product_description = models.TextField(default='', blank=True)
     product_image = models.ImageField(
-        # upload_to='public/products',
         upload_to='products',
         blank=True,
         null=True,
     )
-
     product_type = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
@@ -51,6 +49,8 @@ class Product(models.Model):
 class ProductAdditionalInformation(models.Model):
     product_quantity_add = models.IntegerField(default=0, blank=True)
     product_quantity_returned = models.IntegerField(default=0, blank=True)
+    product_quantity_sale = models.IntegerField(default=0, blank=True)
+    product_quantity_waste = models.IntegerField(default=0, blank=True)
     product_delivery_price_add = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)
     product_add_date = models.DateField(auto_now=True)
 

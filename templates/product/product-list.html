@@ -28,6 +28,8 @@
                         {{ product.product_type }}
                         {{ product.product_code }}
                         {{ product.product_name }}
+                        {{ product.product_quantity }}
+                        {{ product.product_delivery_price }}
                         <img class="card-img-top" src="{{ product.product_image.url }}"
                              alt="{{ product.product_name }}">
                         {#                        <img class="card-img-top" src="{% url 'public file' product.product_image.url %}"#}

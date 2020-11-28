@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from warehouse.forms.common import FilterForm, extract_filter_values
 from warehouse.forms.products import ProductForm, DeleteProductForm, ProductAdditionalInformationForm
 from warehouse.models import Product, Category, ProductAdditionalInformation
+from warehouse.views.common import calculate_quantity_and_price
 
 
 def create_product(request):
@@ -65,6 +66,9 @@ def delete_product(request, pk):
 
 def details_product(request, pk):
     product = Product.objects.get(pk=pk)
+    quantities = ProductAdditionalInformation.objects.all()
+
+    product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(pk, product, quantities)
 
     context = {
         'product': product,
@@ -82,6 +86,10 @@ def list_product(request):
                Product.objects.filter(product_code__icontains=params['text']).order_by(order_by) | \
                Product.objects.filter(product_description__icontains=params['text']).order_by(order_by)
 
+    for product in products:
+        quantities = ProductAdditionalInformation.objects.all()
+        product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.product_id, product, quantities)
+
     context = {
         'products': products,
         'current_page': 'home',
@@ -94,7 +102,6 @@ def list_product(request):
 
 def add_quantity_product(request, pk):
     product = Product.objects.get(pk=pk)
-
     if request.method == 'GET':
         context = {
             'product': product,
