@@ -102,31 +102,25 @@ def list_product(request):
 
 def add_quantity_product(request, pk):
     product = Product.objects.get(pk=pk)
+
     if request.method == 'GET':
         context = {
             'product': product,
-            'form': ProductForm(instance=product),
-            'form_quantity': ProductAdditionalInformationForm(instance=product),
+            'form_quantity': ProductAdditionalInformationForm(),
         }
-
         return render(request, 'product/product-add-quantity.html', context)
     else:
-        form = ProductForm(request.POST, instance=product)
-        form_quantity = ProductAdditionalInformationForm(request.POST, instance=product)
+        form_quantity = ProductAdditionalInformationForm(request.POST)
 
-        # if form_quantity.is_valid():
-        if form.is_valid() & form_quantity.is_valid():
-            product = form.save()
-            # form.save()
-            quantity = form_quantity.save(commit=False)
+        if form_quantity.is_valid():
+
+            quantity = form_quantity.save()
             quantity.product = product
-            quantity.save()
-
+            form_quantity.save()
             return redirect('list product')
 
         context = {
             'product': product,
-            'form': form,
             'form_quantity': form_quantity,
         }
 

@@ -1,21 +1,7 @@
-from typing import List, Any, Tuple
-
 from django.db import models
 
+from warehouse.validators import positive_number
 
-# Create your models here.
-
-
-# class Warehouse(models.Model):
-#     title = models.CharField(max_length=30)
-#     image_url = models.URLField()
-#     description = models.TextField()
-#     ingredients = models.CharField(max_length=250)
-#     time = models.IntegerField()
-#
-#     def __str__(self):
-#         return f'{self.title}; {self.time}; {self.ingredients}; {self.description}; {self.image_url}'
-#
 
 class Category(models.Model):
     category_id = models.AutoField(primary_key=True)
@@ -24,14 +10,13 @@ class Category(models.Model):
 
     def __str__(self):
         return f'{self.category_name}'
-    # return f'{self.category_name}; {self.category_description}'
 
 
 class Product(models.Model):
     product_id = models.AutoField(primary_key=True)
     product_code = models.CharField(max_length=100)
     product_name = models.CharField(max_length=500)
-    product_quantity = models.IntegerField(default=0, blank=True)  # calculation field
+    product_quantity = models.IntegerField(default=0, blank=True,)  # calculation field
     product_delivery_price = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)  # calculation field
     product_description = models.TextField(default='', blank=True)
     product_image = models.ImageField(
@@ -42,17 +27,42 @@ class Product(models.Model):
     product_type = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.product_code}; {self.product_name}; {self.product_description};' \
-               f' {self.product_image}; {self.product_type}'
+        return f'{self.product_id}; {self.product_code}; {self.product_name};' \
+               f'{self.product_quantity}; {self.product_delivery_price}; ' \
+               f'{self.product_description}' \
+               f'{self.product_image}; {self.product_type}'
 
 
 class ProductAdditionalInformation(models.Model):
-    product_quantity_add = models.IntegerField(default=0, blank=True)
-    product_quantity_returned = models.IntegerField(default=0, blank=True)
-    product_quantity_sale = models.IntegerField(default=0, blank=True)
-    product_quantity_waste = models.IntegerField(default=0, blank=True)
-    product_delivery_price_add = models.DecimalField(max_digits=10, decimal_places=2, default=0, blank=True)
+    product_quantity_add = models.IntegerField(
+        validators=[positive_number],
+        default=0,
+        blank=True,
+    )
+    product_quantity_returned = models.IntegerField(
+        validators=[positive_number],
+        default=0,
+        blank=True,
+    )
+    product_quantity_sale = models.IntegerField(
+        validators=[positive_number],
+        default=0,
+        blank=True,
+    )
+    product_quantity_waste = models.IntegerField(
+        validators=[positive_number],
+        default=0,
+        blank=True,
+    )
+    product_delivery_price_add = models.DecimalField(
+        validators=[positive_number],
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=True
+    )
     product_add_date = models.DateField(auto_now=True)
+    document = models.CharField(max_length=300, default='', blank=True)
 
     product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
 

@@ -12,19 +12,16 @@
 
                 {{ form_quantity.label_suffix }}
                 {{ form_quantity }}
-                {{ form.errors }}
+                {{ form_quantity.errors }}
 
-                {{ form.product_type.label }}
-                {{ form.product_type }}
-
-                {{ form.product_code.label }}
-                {{ form.product_code }}
-
-                {{ form.product_name.label }}
-                {{ form.product_name }}
-
-                {{ form.product_description.label }}
-                {{ form.product_description }}
+{#                {{ form.product_type.label }}#}
+{#                {{ form.product_type }}#}
+{##}
+{#                {{ form.product_code.label }}#}
+{#                {{ form.product_code }}#}
+{##}
+{#                {{ form.product_name.label }}#}
+{#                {{ form.product_name }}#}
 
                 {{ form.product_image.label }}
                 <img id="img_preview" class="card-img-top" src="{{ product.product_image.url }}"
