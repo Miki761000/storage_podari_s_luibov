@@ -34,6 +34,7 @@ class Product(models.Model):
 
 
 class ProductAdditionalInformation(models.Model):
+    product_code = models.CharField(max_length=100)
     product_quantity_add = models.IntegerField(
         validators=[positive_number],
         default=0,

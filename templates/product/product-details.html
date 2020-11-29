@@ -17,6 +17,7 @@
             </div>
             <div class="content">
                 <div class="buttons-container">
+                    <a href="{% url 'add quantity product' product.product_id %}">Change Quantity</a>
                     <a class="button edit" href="{% url 'list product' %}">All Products</a>
                     <a class="button edit" href="{% url 'edit product' product.product_id %}">Edit</a>
                     <a class="button delete" href="{% url 'delete product' product.product_id %}">Delete</a>

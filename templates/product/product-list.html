@@ -34,7 +34,7 @@
                              alt="{{ product.product_name }}">
                         {#                        <img class="card-img-top" src="{% url 'public file' product.product_image.url %}"#}
                         {#                             alt="{{ product.product_name }}">#}
-                        <a href="{% url 'add quantity product' product.product_id %}">Add Quantity</a>
+                        <a href="{% url 'add quantity product' product.product_id %}">Change Quantity</a>
                         <a href="{% url 'details product' product.product_id %}">Details</a>
                         <a href="{% url 'edit product' product.product_id %}">Edit</a>
                         <a href="{% url 'delete product' product.product_id %}">Delete</a>

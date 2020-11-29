@@ -32,14 +32,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'warehouse',
+    'accounts',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'warehouse',
 ]
 
 MIDDLEWARE = [
@@ -138,4 +139,6 @@ MEDIA_ROOT = (
         os.path.join(BASE_DIR, 'media')
     )
 
-# LOGIN_URL = '/auth/login/'
+# LOGIN_URL = '/accounts/login/'
+
+LOGIN_REDIRECT_URL = '/'

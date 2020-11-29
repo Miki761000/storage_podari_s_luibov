@@ -15,12 +15,27 @@
             </a>
         </div>
 
-        <div class="pull-right">
-            <div id="account" class="btn-group">
-                <i class="fa fa-user"></i>
-                <a class="btn" href="/">Login</a>
+        {% if user.is_authenticated %}
+            <div class="pull-right">
+                <li id="account" class="btn-group">
+                    <i class="fa fa-user"></i>
+                    <a class="btn" href="{% url 'user profile' user.id %} ">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signout user' %}">Sign out</a>
+                </li>
             </div>
-        </div>
+        {% else %}
+            <div class="pull-right">
+                <li id="account" class="btn-group">
+                    <i class="fa fa-user"></i>
+                    <a class="btn" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup user' %}">Sign Up</a>
+                </li>
+            </div>
+        {% endif %}
     </div>
 </nav>
 
