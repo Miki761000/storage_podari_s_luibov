@@ -1,9 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from accounts.decorators import user_required, superuser_required
 from warehouse.forms.category import CategoryForm, DeleteCategoryForm
 from warehouse.models import Category
 
 
+@login_required
+# @superuser_required()
 def create_category(request):
     if request.method == 'GET':
         context = {
@@ -20,6 +24,8 @@ def create_category(request):
             return redirect('index')
 
 
+@login_required
+# @superuser_required()
 def edit_category(request, pk):
     category = Category.objects.get(pk=pk)
 
@@ -45,6 +51,8 @@ def edit_category(request, pk):
         return render(request, 'category/category-edit.html', context)
 
 
+@user_required(Category)
+# @superuser_required()
 def delete_category(request, pk):
     category = Category.objects.get(pk=pk)
 
@@ -61,6 +69,8 @@ def delete_category(request, pk):
         return redirect('index')
 
 
+@login_required
+# @superuser_required()
 def details_category(request, pk):
     category = Category.objects.get(pk=pk)
 
@@ -72,6 +82,8 @@ def details_category(request, pk):
     return render(request, 'category/category-details.html', context)
 
 
+@login_required
+# @superuser_required()
 def list_category(request):
     context = {
         'categories': Category.objects.all(),

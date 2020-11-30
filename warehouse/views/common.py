@@ -7,7 +7,8 @@ def calculate_quantity_and_price(pk, product, quantities):
 
     product_price_sum_add = sum([quantity.product_quantity_add * quantity.product_delivery_price_add for quantity in quantities.filter(product_id=pk)])
     product_price_sum_ret = sum([quantity.product_quantity_returned * quantity.product_delivery_price_add for quantity in quantities.filter(product_id=pk)])
-    product.product_delivery_price = round((product_price_sum_add + product_price_sum_ret) / product_quantity_add, 2)
+    if product_quantity_add != 0:
+        product.product_delivery_price = round((product_price_sum_add + product_price_sum_ret) / product_quantity_add, 2)
 
     return product.product_quantity, product.product_delivery_price
 

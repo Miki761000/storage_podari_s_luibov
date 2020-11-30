@@ -2,7 +2,7 @@ from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 
-from accounts.forms import SignUpForm, UserProfileForm
+from accounts.forms import UserProfileForm, SignUpForm
 from accounts.models import UserProfile
 
 

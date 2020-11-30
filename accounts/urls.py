@@ -1,6 +1,6 @@
 from django.urls import path, include
 
-from accounts.views import signup_user, signout_user, user_profile
+from accounts.views import signout_user, user_profile, signup_user
 
 urlpatterns = [
     # path('signin/', LoginView.as_view(template_name='registration/signup.html'), name='signin user', ),
