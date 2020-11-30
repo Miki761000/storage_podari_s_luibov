@@ -1,5 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.shortcuts import render, redirect
 
 from accounts.decorators import user_required, superuser_required
@@ -103,14 +104,45 @@ def list_product(request):
         quantities = ProductAdditionalInformation.objects.all()
         product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.product_id, product, quantities)
 
-    context = {
+    # context = {
+    #     'products': products,
+    #     'current_page': 'home',
+    #     'filter_form': FilterForm(initial=params),
+    #     # 'products': Product.objects.all(),
+    # }
+    #
+    # return render(request, 'product/product-list.html', context)
+
+    items_per_page = 10
+    paginator = Paginator(products, items_per_page)
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    try:
+        products = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        products = paginator.page(1)
+
+    # Get the index of the current page
+    index = products.number - 1  # edited to something easier without index
+    # This value is maximum index of your pages, so the last page - 1
+    max_index = len(paginator.page_range)
+    # You want a range of 7, so lets calculate where to slice the list
+    start_index = index - 3 if index >= 3 else 0
+    end_index = index + 3 if index <= max_index - 3 else max_index
+    # Get our new page range. In the latest versions of Django page_range returns
+    # an iterator. Thus pass it to list, to make our slice possible again.
+    page_range = list(paginator.page_range)[start_index:end_index]
+
+    return render(request, 'product/product-list.html', {
         'products': products,
         'current_page': 'home',
         'filter_form': FilterForm(initial=params),
-        # 'products': Product.objects.all(),
-    }
-
-    return render(request, 'product/product-list.html', context)
+        'page_range': page_range,
+    })
 
 
 @login_required

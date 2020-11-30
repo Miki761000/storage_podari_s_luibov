@@ -17,13 +17,17 @@
             {% csrf_token %}
             <button>Filter</button>
         </form>
-
+    </div>
+    <div>
         {% if not products %}
             <p>No products</p>
         {% else %}
             {% csrf_token %}
-            <ul>
-                {% for product in products %}
+            {% include 'partials/paging.html' %}
+            <span class="clear_both"></span>
+
+            {% for product in products %}
+                <ul>
                     <li>
                         {{ product.product_type }}
                         {{ product.product_code }}
@@ -39,8 +43,9 @@
                         <a href="{% url 'edit product' product.product_id %}">Edit</a>
                         <a href="{% url 'delete product' product.product_id %}">Delete</a>
                     </li>
-                {% endfor %}
-            </ul>
+                </ul>
+            {% endfor %}
         {% endif %}
+        {% include 'partials/paging.html' %}
     </div>
 {% endblock %}
