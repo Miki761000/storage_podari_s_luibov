@@ -1,0 +1,21 @@
+{% extends 'shared/site.html' %}
+{% load static %}
+
+{% block site_content %}
+    <h1 class="text-center">Edit Category: </h1>
+    <div class="row">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6">
+            <form method="post" class="furniture-form" action="{% url 'edit category' category.category_id %}">
+                {% csrf_token %}
+
+                {{ form.category_name.label }}
+                {{ form.category_name }}
+                {{ form.category_name.errors }}
+
+                <button class="btn btn-primary mt-2" type="submit">Edit</button>
+            </form>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+{% endblock %}

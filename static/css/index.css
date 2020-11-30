@@ -1,0 +1,37 @@
+.main_content {
+    background-color: #ffffff;
+}
+
+.bottom-container {
+    background-color: #ffffff;
+}
+
+.index-container,
+.bottom-container {
+    /*display: inline;*/
+    width: 100%;
+}
+
+.index-container .main_content {
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    /*flex-direction: row;*/
+    font-size: 1.3em;
+    border-color: #333333;
+}
+
+.main_content .list {
+    margin: 1.7em;
+    max-width: 90%;
+    padding: 3em;
+    border: 1px solid #cccccc;
+    border-radius: 0.3em;
+    background: #cccccc;
+    color: #000000;
+    justify-content: center;
+}
+
+.bottom-container {
+    min-height: 500px;
+}
