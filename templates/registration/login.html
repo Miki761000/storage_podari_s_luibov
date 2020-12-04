@@ -9,7 +9,7 @@
             {% csrf_token %}
             {{ form }}
             <button type="submit" class="btn btn-primary">Login</button>
-            <span>Doesn't have account<a href="{% url 'signup user' %}" style="">Sign in here</a></span>
+            <span>Doesn't have account<a href="{% url 'signup user' %}" style="">Register here</a></span>
         </form>
     </div>
 {% endblock %}

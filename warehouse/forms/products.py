@@ -10,6 +10,17 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = '__all__'
 
+        class Meta:
+            model = Product
+            fields = '__all__'
+            field_order = [
+                'product_name',
+                'product_code',
+                'product_quantity',
+                'product_type',
+                'product_id',
+            ]
+
 
 class ProductAdditionalInformationForm(forms.ModelForm):
     class Meta:
