@@ -26,7 +26,11 @@ SECRET_KEY = 'b73d*j1an@_2gy(9g^%fvzpkmwv3wj=b-=h5u2$spa#2et!5hv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    #'petstagram-demo.herokuapp.com'
+]
 
 
 # Application definition
@@ -128,9 +132,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = ''
+# STATIC_URL = '/static/' #-> local CSS
+# STATIC_ROOT = '/tmp/storage_podari_s_luibov_static'
 STATICFILES_DIRS = (
-    join(BASE_DIR, '../static'),
+    join(BASE_DIR, 'static'),
 )
 
 MEDIA_URL = '/media/'
@@ -142,3 +147,5 @@ MEDIA_ROOT = (
 # LOGIN_URL = '/accounts/login/'
 
 LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

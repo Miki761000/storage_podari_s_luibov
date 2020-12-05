@@ -1,10 +1,12 @@
 from django import dispatch
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.template.loader import render_to_string
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import FormView, DeleteView
+from django.views.generic import FormView, DeleteView, DetailView
 
 from accounts.decorators import user_required, superuser_required
 from common.decorators import groups_required
@@ -35,14 +37,20 @@ class CategoryEditView(FormView):
     template_name = 'category/category-edit.html'
     success_url = reverse_lazy('list category')
     # groups = ['User']
+    pk = None
 
-    def get_form_kwargs(self):
-        kwargs = super(CategoryEditView,self).get_form_kwargs()
-        kwargs.update(self.kwargs)
-        return kwargs
+    def get_queryset(self, *args, **kwargs):
+        return CategoryForm.objects.filter(category_id=self.kwargs['pk'])
+
+    # def get_form_kwargs(self):
+    #     kwargs = super(CategoryEditView, self).get_form_kwargs()
+    #     kwargs.update(self.kwargs)
+    #     return kwargs
 
     def form_valid(self, form):
-        form.save()
+        # form.save()
+        category = form.save()
+        self.pk = category.category_id
         return super().form_valid(form)
 
 

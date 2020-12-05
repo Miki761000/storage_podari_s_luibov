@@ -1,9 +1,14 @@
 from django.contrib.auth import logout, login
 from django.contrib.auth.models import User
+from django.contrib.sites.shortcuts import get_current_site
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes, force_text
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 from accounts.forms import UserProfileForm, SignUpForm
 from accounts.models import UserProfile
+from accounts.tokens import account_activation_token
 
 
 def user_profile(request, pk=None):
