@@ -1,20 +1,21 @@
 {% load static %}
-<div class="prev_next">
-    {% if products.has_previous %}
-        <a class="prev btn btn-info" href="?page={{ products.previous_page_number }}">Prev</a>
-    {% endif %}
-    {% if products.has_next %}
-        <a class="next btn btn-info" href="?page={{ products.next_page_number }}">Next</a>
-    {% endif %}
-    <div class="pages">
-        <ul>
-            {% for pg in page_range %}
-                {% if products.number == pg %}
-                    <li><a href="?page={{ pg }}" class="btn btn-default">{{ pg }}</a></li>
-                {% else %}
-                    <li><a href="?page={{ pg }}" class="btn">{{ pg }}</a></li>
-                {% endif %}
-            {% endfor %}
-        </ul>
+<div class="paging">
+    <div class="next">
+        Pages:
+        {% if products.has_previous %}
+            <a class="prev btn btn-info" href="?page={{ products.previous_page_number }}">Prev</a>
+        {% endif %}
+        {% if products.has_next %}
+            <a class="next btn btn-info" href="?page={{ products.next_page_number }}">Next</a>
+        {% endif %}
     </div>
+    {% for pg in page_range %}
+        <div class="pages">
+            {% if products.number == pg %}
+                <a href="?page={{ pg }}" class="btn btn-default">{{ pg }}</a>
+            {% else %}
+                <a href="?page={{ pg }}" class="btn">{{ pg }}</a>
+            {% endif %}
+        </div>
+    {% endfor %}
 </div>

@@ -35,4 +35,3 @@ def extract_filter_values(params):
         'order': order,
         'text': text,
     }
-    # index?page=3&page_size=10

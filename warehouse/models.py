@@ -4,7 +4,7 @@ from warehouse.validators import positive_number
 
 
 class Category(models.Model):
-    category_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     category_name = models.CharField(max_length=250)
 
     # category_description = models.TextField(default='', blank=True)
@@ -14,7 +14,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    product_id = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     product_code = models.CharField(max_length=100)
     product_name = models.CharField(max_length=500)
     product_quantity = models.IntegerField(default=0, blank=True, )  # calculation field
@@ -29,7 +29,7 @@ class Product(models.Model):
     product_type = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.product_id}; {self.product_code}; {self.product_name};' \
+        return f'{self.id}; {self.product_code}; {self.product_name};' \
                f'{self.product_quantity}; {self.product_delivery_price}; ' \
                f'{self.product_image}; {self.product_type};' \
                f'{self.product_description}'

@@ -34,6 +34,7 @@ def signup_user(request):
     if request.method == 'GET':
         context = {
             'form': SignUpForm(),
+            'profile_form': UserProfileForm()
         }
 
         return render(request, 'accounts/signup.html', context)

@@ -2,14 +2,75 @@
 {% load static %}
 
 {% block site_content %}
-{#    <h1 id="category" class="">Sign up</h1>#}
     <div id="menu" class="">
         <form style="" method="post" enctype="multipart/form-data">
-            <h2>Sign up</h2>
             {% csrf_token %}
-            {{ form }}
+            <h2>Sign up</h2>
+            <div>
+                {% for field in form %}
+                    <div class="form-control">
+                        <p class="name">{{ field.label_tag }}</p>
+                        <p class="input">{{ field }}</p>
+                    </div>
+                    {% if field.help_text %}
+                        <div class="help_text">
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="error">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+            {% for field in profile_form %}
+                    <div class="form-control">
+                        <p class="name">{{ field.label_tag }}</p>
+                        <p class="input">{{ field }}</p>
+                    </div>
+                    {% if field.help_text %}
+                        <div class="help_text">
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <div class="error">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
             <button class="btn btn-primary" type="submit">Sign up</button>
-            <span>Already has account<a href="{% url 'login' %}" style="">Login in here</a></span>
+            <div><span>Already has account<a href="{% url 'login' %}" style="">Login in here</a></span></div>
         </form>
+    </div>
+
+    <div id="popup_register" class="modal-body">
+        <form class="popup_register">
+            <div><input type="text" name="firstname" value="" placeholder="Име" class="form-control"></div>
+            <div><input type="text" name="lastname" value="" placeholder="Фамилия" class="form-control"></div>
+            <div><input type="text" name="telephone" value="" placeholder="Телефон" class="customer_phone form-control">
+            </div>
+            <div><input type="text" name="email" value="" placeholder="Е-mail" class="form-control"></div>
+            <div><input type="password" name="password" value="" placeholder="Въведете парола" class="form-control">
+            </div>
+            <div class="customer_group" style="display: none;">
+                <input type="radio" name="customer_group_id" value="1" id="customer_group_id1" checked="checked">
+                <label for="customer_group_id1"></label>
+                <label for="customer_group_id1">Клиенти</label>
+                <br>
+            </div>
+            <div>
+            </div>
+        </form>
+        <div>
+            <button class="register_button btn btn-primary" onclick="send_register();" data-loading-text="Зареждане...">
+                Регистрирай се
+            </button>
+        </div>
+        <div>Вече сте регистриран? <a
+                onclick="$('#modal-register-form').modal('hide'); $('#modal-login-form').modal('show');">Моля, влезте с
+            и-мейл и парола!</a></div>
     </div>
 {% endblock %}

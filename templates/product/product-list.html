@@ -3,7 +3,7 @@
 
 {% block site_content %}
     <h1 id="category" class="">Products</h1>
-    <div id="menu" class="">
+    <div id="" class="">
         <a href="{% url 'create product' %}">Add new Product</a>
         <a href="{% url 'list product' %}">All Products</a>
 
@@ -12,11 +12,15 @@
         {#            <button id="search_submit" type="submit">Submit</button>#}
         {#        </form>#}
 
-        <form method="get" action="{% url 'list product' %}">
-            {{ filter_form }}
+        <form id="myInput" method="get" action="{% url 'list product' %}">
             {% csrf_token %}
+            {{ filter_form }}
             <button>Filter</button>
+            {#            <input type="reset" value="Reset">#}
+            {#            <input type="submit" value="Filter">#}
         </form>
+
+
     </div>
     <div>
         {% if not products %}
@@ -26,25 +30,30 @@
             {% include 'partials/paging.html' %}
             <span class="clear_both"></span>
 
-            {% for product in products %}
-                <ul>
-                    <li>
-                        {{ product.product_type }}
-                        {{ product.product_code }}
-                        {{ product.product_name }}
-                        {{ product.product_quantity }}
-                        {{ product.product_delivery_price }}
-                        <img class="card-img-top" src="{{ product.product_image.url }}"
-                             alt="{{ product.product_name }}">
+            <div class="gallery">
+                {% for product in products %}
+                    <div class="location-image">
+                        <div class="title">
+                            <h4>{{ product.product_name }}</h4>
+                            <h5>Product Code: <p class="price">{{ product.product_code }}</p></h5>
+                            <h5>Product Type: {{ product.product_type }}</h5>
+                        </div>
+                        <div><img class="" src="{{ product.product_image.url }}" alt="{{ product.product_name }}"></div>
                         {#                        <img class="card-img-top" src="{% url 'public file' product.product_image.url %}"#}
                         {#                             alt="{{ product.product_name }}">#}
-                        <a href="{% url 'add quantity product' product.product_id %}">Change Quantity</a>
-                        <a href="{% url 'details product' product.product_id %}">Details</a>
-                        <a href="{% url 'edit product' product.product_id %}">Edit</a>
-                        <a href="{% url 'delete product' product.product_id %}">Delete</a>
-                    </li>
-                </ul>
-            {% endfor %}
+                        <div class="product-price">
+                            <div>Quantity: <p class="price">{{ product.product_quantity }}</p></div>
+                            <div>Avg. Devivery Price: <p class="price">{{ product.product_delivery_price }}</p></div>
+                        </div>
+                        <div class="buttons">
+                            <button><a href="{% url 'add quantity product' product.id %}">Change Quantity</a></button>
+                            <button><a href="{% url 'details product' product.id %}">Details</a></button>
+                            <button><a href="{% url 'edit product' product.id %}">Edit</a></button>
+                            <button><a href="{% url 'delete product' product.id %}">Delete</a></button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
         {% endif %}
         {% include 'partials/paging.html' %}
     </div>

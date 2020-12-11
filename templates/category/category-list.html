@@ -16,8 +16,8 @@
                 {% for category in categories %}
                     <tr>
                         <th class="">{{ category.category_name }}</th>
-                        <th><a href="{% url 'edit category' category.category_id %}">Edit</a></th>
-                        <th><a href="{% url 'delete category' category.category_id %}">Delete</a></th>
+                        <th><a href="{% url 'edit category' category.id %}">Edit</a></th>
+                        <th><a href="{% url 'delete category' category.id %}">Delete</a></th>
                     </tr>
                 {% endfor %}
             </table>

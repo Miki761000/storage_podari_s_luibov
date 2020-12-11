@@ -7,13 +7,22 @@ from django.template.loader import render_to_string
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import FormView, DeleteView, DetailView
+from django.contrib.auth import mixins as auth_mixins
+from django.views import generic as views
 
 from accounts.decorators import user_required, superuser_required
 from common.decorators import groups_required
 from common.view_mixins import GroupRequiredMixin, UserRequiredMixin
+from core.clean_up import clean_up_files
 from warehouse.forms.category import CategoryForm, DeleteCategoryForm
 from warehouse.forms.common import extract_filter_values
 from warehouse.models import Category
+
+
+class CategoryListView(views.ListView):
+    model = Category
+    template_name = 'category/category-list.html'
+    context_object_name = 'categories'
 
 
 # @method_decorator(groups_required(groups=['Regular User', 'Super User']), name='dispatch')
@@ -29,37 +38,33 @@ class CategoryCreateView(FormView):
         return super().form_valid(form)
 
 
-# @method_decorator(groups_required(groups=['Regular User', 'Super User']), name='dispatch')
 @method_decorator(login_required, name='dispatch')
-# class CategoryEditView(GroupRequiredMixin, LoginRequiredMixin, FormView):
-class CategoryEditView(FormView):
-    form_class = CategoryForm
+class UpdateCategoryView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     template_name = 'category/category-edit.html'
-    success_url = reverse_lazy('list category')
-    # groups = ['User']
-    pk = None
+    model = Category
+    form_class = CategoryForm
 
-    def get_queryset(self, *args, **kwargs):
-        return CategoryForm.objects.filter(category_id=self.kwargs['pk'])
-
-    # def get_form_kwargs(self):
-    #     kwargs = super(CategoryEditView, self).get_form_kwargs()
-    #     kwargs.update(self.kwargs)
-    #     return kwargs
+    def get_success_url(self):
+        url = reverse_lazy('edit category', kwargs={'pk': self.object.id})
+        url_list = reverse_lazy('list category')
+        return url_list
 
     def form_valid(self, form):
-        # form.save()
-        category = form.save()
-        self.pk = category.category_id
+        # old_image = self.get_object().image
+        # if old_image:
+        #     clean_up_files(old_image.path)
         return super().form_valid(form)
 
 
-class DeleteCategoryView(DeleteView):
+@method_decorator(groups_required(groups=['Super User']), name='dispatch')
+class DeleteCategoryView(auth_mixins.LoginRequiredMixin, views.DeleteView):
     model = Category
-    success_url = reverse_lazy('category/category-delete.html')
+    template_name = 'category/category-delete.html'
+    success_url = reverse_lazy('list category')
 
-    def get_queryset(self, *args, **kwargs):
-        return DeleteCategoryForm.objects.filter(category_id=self.kwargs['pk'])
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
 
 # @login_required
 # def create_category(request):
@@ -103,8 +108,8 @@ class DeleteCategoryView(DeleteView):
 #         }
 #
 #         return render(request, 'category/category-edit.html', context)
-
-
+#
+#
 # @user_required(Category)
 # # @superuser_required()
 # def delete_category(request, pk):
@@ -121,28 +126,26 @@ class DeleteCategoryView(DeleteView):
 #     else:
 #         category.delete()
 #         return redirect('index')
-
-
-
-@login_required
-# @superuser_required()
-def details_category(request, pk):
-    category = Category.objects.get(pk=pk)
-
-    context = {
-        'category': category,
-        'form': CategoryForm(),
-    }
-
-    return render(request, 'category/category-details.html', context)
-
-
-@login_required
-# @superuser_required()
-def list_category(request):
-    context = {
-        'categories': Category.objects.all(),
-    }
-
-    return render(request, 'category/category-list.html', context)
+#
+# @login_required
+# # @superuser_required()
+# def details_category(request, pk):
+#     category = Category.objects.get(pk=pk)
+#
+#     context = {
+#         'category': category,
+#         'form': CategoryForm(),
+#     }
+#
+#     return render(request, 'category/category-details.html', context)
+#
+#
+# @login_required
+# # @superuser_required()
+# def list_category(request):
+#     context = {
+#         'categories': Category.objects.all(),
+#     }
+#
+#     return render(request, 'category/category-list.html', context)
 
