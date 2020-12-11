@@ -62,7 +62,7 @@ def details_product(request, pk):
     product = Product.objects.get(pk=pk)
     quantities = ProductAdditionalInformation.objects.all()
 
-    product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(pk, product, quantities)
+    product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.product_code, product, quantities)
 
     context = {
         'product': product,
@@ -84,7 +84,7 @@ def list_product(request):
 
     for product in products:
         quantities = ProductAdditionalInformation.objects.all()
-        product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.id, product, quantities)
+        product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.product_code, product, quantities)
 
     items_per_page = 9
     paginator = Paginator(products, items_per_page)
