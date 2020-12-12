@@ -1,0 +1,17 @@
+.carousel-inner img {
+    width: 70%;
+    height: auto;
+    margin: 0 15%;
+    /*padding: 3em 0 0 0;*/
+  }
+
+.banners {
+    padding: 3em 0 0 0;
+}
+
+/*.carousel-control-next-icon,*/
+/*.carousel-control-prev-icon {*/
+/*    background: var(--color-nav-bgrd);*/
+/*    color: var(--color-main-bgrd) !important;*/
+/*}*/
+

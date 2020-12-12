@@ -1,0 +1,177 @@
+header,
+footer {
+    display: flex;
+    justify-content: space-between;
+    color: var(--color-main-text);
+    font: inherit;
+}
+
+a {
+    color: var(--color-main-text);
+}
+
+.header,
+.footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-items: center;
+}
+
+.header .top-first {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /*border-bottom: 3px solid var(--color-nav-bgrd);*/
+}
+
+.footer .footer-first {
+    /*width: 99%;*/
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
+    /*border-top: 3px solid var(--color-main-bgrd);*/
+    font-weight: bold;
+    margin-top: 1em;
+    padding: 1em;
+
+}
+
+.header .top-first img,
+.header .main-logo img,
+.footer .footer-first img,
+.footer .main-logo img {
+    width: 150px;
+    /*height: 150px;*/
+    margin-top: 2em;
+    box-shadow: none;
+    /*position: fixed;*/
+}
+
+.header .main-logo,
+.footer .main-logo {
+    width: 100%;
+    display: block;
+    margin: 0 15%;
+}
+
+.header .logo,
+.footer .logo {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    /*justify-content: space-around;*/
+    justify-content: left;
+    align-items: center;
+}
+
+.header .top-first .logo,
+.footer .footer-first .logo {
+    /*width: 20%;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.5em;
+}
+
+.header .top-first .top-menu-right,
+.footer .footer-first .footer-menu-right {
+    width: 25%;
+    /*padding-right: 3%;*/
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-bottom: 0.5em;
+}
+
+body > header > div > div > ul > li,
+body > footer > div > div > ul > li {
+    padding-right: 1em;
+}
+
+.header .top-first .top-menu-left,
+.footer .footer-first .footer-menu-left {
+    width: 25%;
+    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 0.5em;
+    margin-right: 1%;
+}
+
+body > header > div > div > ul > li,
+body > footer > div > div > ul > li {
+    display: flex;
+    flex-direction: row;
+    padding-right: 0.5em;
+}
+
+body > header > div > div > ul > li > a,
+body > footer > div > div > ul > li > a {
+    padding-left: 0.3em;
+}
+
+.name {
+    width: 45%;
+    text-align: center;
+}
+
+
+header h2 {
+    padding: 0.7rem -1rem;
+    display: flex;
+    align-items: center;
+    color: var(--color-main-text);
+    text-shadow: 1px 1px 1px var(--color-nav-bgrd);
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+}
+
+.top-menu {
+    display: flex;
+    flex-direction: row;
+    background: var(--color-main-text);
+    color: var(--color-main-bgrd);
+}
+
+.top-menu p {
+    margin-left: 0.5em;
+}
+
+header p img {
+    width: 22px;
+    height: 22px;
+    margin: 0 0.2rem;
+}
+
+#account,
+div.header > div > div.top-menu-left > div.nav-items {
+    padding: 0 0.5em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#account {
+    align-items: center;
+}
+
+#account > i {
+    padding: 0.5em;
+}
+
+div.header > div > div.name > div {
+    padding: 2em;
+    align-items: center;
+    color: var(--color-main-bgrd);
+}
+
+body > header > div > div.nav {
+    margin: 0 auto;
+    padding: 0.5em;
+}

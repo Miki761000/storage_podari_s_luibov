@@ -1,39 +1,63 @@
 {% load static %}
-
-<div class="name">
-    <div class="menu">
-        <h1 class="">Складови наличности</h1>
-    </div>
-</div>
-
-<nav class="top">
-    <div class="container">
-        <div class="logo">
-            <a href="/">
-                <img src="{% static 'img/podari-s-liubov-logo.jpg' %}" alt="logo"/>
-            </a>
+<header>
+    <div class="header">
+        <div class="top-first">
+            <div class="top-menu-left">
+                {% if user.is_authenticated %}
+                    <div id="account" class="delivery">
+                        <i class="fa fa-user"></i>
+                        <a class="btn" href="{% url 'user profile' user.id %} ">Profile</a>
+                    </div>
+                    <div class="nav-items">
+                        <a class="nav-link" href="{% url 'signout user' %}">Log out</a>
+                    </div>
+                {% else %}
+                    <div id="account" class="delivery">
+                        <i class="fa fa-user"></i>
+                        <a class="btn" href="{% url 'login' %}">Login</a>
+                    </div>
+                    <div class="nav-items">
+                        <a class="nav-link" href="{% url 'signup user' %}">Register</a>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="name">
+                <div class="menu">
+                    <h1 class="name-h1">Складови наличности</h1>
+                </div>
+            </div>
+            <div class="top-menu-right">
+                <div class="main-logo">
+                    <div class="logo">
+                        <a href="/">
+                            <img src="{% static 'img/podari-s-liubov-logo.jpg' %}" alt="logo"/>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        {% if user.is_authenticated %}
-            <div class="pull-right">
-                <div id="account" class="btn-group">
-                    <i class="fa fa-user"></i>
-                    <a class="btn" href="{% url 'user profile' user.id %} ">Profile</a>
-                </div>
-                <div class="nav-item">
-                    <a class="nav-link" href="{% url 'signout user' %}">Log out</a>
-                </div>
-            </div>
-        {% else %}
-            <div class="pull-right">
-                <div id="account" class="btn-group">
-                    <i class="fa fa-user"></i>
-                    <a class="btn" href="{% url 'login' %}">Login</a>
-                </div>
-                <div class="nav-item">
-                    <a class="nav-link" href="{% url 'signup user' %}">Register</a>
-                </div>
-            </div>
-        {% endif %}
+        <div class="nav1">
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'list category' %}">Categories</a>
+                        <ul>
+                            <li><a href="{% url 'list category' %}">List of categories</a></li>
+                            <li><a href="{% url 'create category' %}">Create new category</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{% url 'list product' %}">Products</a>
+                        <ul>
+                            <li><a href="{% url 'list product' %}">List of products</a></li>
+                            <li><a href="{% url 'create product' %}">Create new product</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Reports</a>
+
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
-</nav>
+</header>

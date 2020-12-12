@@ -6,18 +6,21 @@ from os.path import join, isfile
 from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.views import generic as views
 
-# Create your views here.
 from warehouse.models import Category, Product
 
 
-def index(request):
-    context = {
-        'categories': Category.objects.all().order_by('category_name'),
-        'products': Product.objects.all().order_by('product_code')
-    }
+class IndexPage(views.TemplateView):
+    template_name = 'index.html'
 
-    return render(request, 'index.html', context)
+# def index(request):
+#     context = {
+#         'categories': Category.objects.all().order_by('category_name'),
+#         'products': Product.objects.all().order_by('product_code')
+#     }
+#
+#     return render(request, 'index.html', context)
 
 
 def get_private_file(request, path_to_file):

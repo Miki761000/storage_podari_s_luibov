@@ -1,0 +1,36 @@
+@import url('clear.css');
+@import url('index.css');
+@import url('form.css');
+@import url('grid.css');
+@import url('variables.css');
+@import url('header_and_footer.css');
+@import url('navigation.css');
+@import url('carusel.css');
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    position: relative;
+}
+
+header {
+    min-height: 50px
+}
+
+body {
+    position: relative;
+}
+
+body::after {
+    content: '';
+    display: block;
+    height: 50px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+}
+

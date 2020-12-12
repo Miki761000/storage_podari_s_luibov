@@ -1,6 +1,7 @@
 from django.db import models
 
 from warehouse.validators import positive_number
+from warehouse.views.common import calculate_quantity_and_price
 
 
 class Category(models.Model):
