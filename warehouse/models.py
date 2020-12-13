@@ -37,6 +37,7 @@ class Product(models.Model):
 
 
 class ProductAdditionalInformation(models.Model):
+    id = models.AutoField(primary_key=True)
     product_code = models.CharField(max_length=100)
     product_quantity_add = models.IntegerField(
         validators=[positive_number],
@@ -68,4 +69,4 @@ class ProductAdditionalInformation(models.Model):
     product_add_date = models.DateField(auto_now=True)
     document = models.CharField(max_length=300, default='', blank=True)
 
-    product = models.ForeignKey(Product, on_delete=models.DO_NOTHING)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)

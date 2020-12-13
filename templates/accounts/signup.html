@@ -2,75 +2,135 @@
 {% load static %}
 
 {% block site_content %}
-    <div id="menu" class="">
-        <form style="" method="post" enctype="multipart/form-data">
+    <form class="login" style="" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Registration Form</legend>
             {% csrf_token %}
-            <h2>Sign up</h2>
-            <div>
-                {% for field in form %}
-                    <div class="form-control">
-                        <p class="name">{{ field.label_tag }}</p>
-                        <p class="input">{{ field }}</p>
-                    </div>
-                    {% if field.help_text %}
-                        <div class="help_text">
-                            <small>{{ field.help_text }}</small>
-                        </div>
+            <p class="field1">
+                {% for field in user_form %}
+                    {% if field.name == 'username' %}
+                        <label for="username">Username: </label>
+                        <span class="input">
+                            <input type="text" name="username" id="user" autocomplete="off">
+                            <span class="actions"></span>
+                            <i class="fas fa-user"></i>
+                        </span>
+                        {% if field.help_text %}
+                            <div class="help_text">
+                                <small>{{ field.help_text }}</small>
+                            </div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <div class="error">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% elif field.name == 'first_name' %}
+                        <label for="first_name">First Name: </label>
+                        <span class="input">
+                            <input type="text" name="first_name" id="first_name" autocomplete="off">
+                            <span class="actions"></span>
+                            <i class="fas fa-user"></i>
+                        </span>
+                        {% if field.help_text %}
+                            <div class="help_text">
+                                <small>{{ field.help_text }}</small>
+                            </div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <div class="error">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% elif field.name == 'last_name' %}
+                        <label for="last_name">Last Name: </label>
+                        <span class="input">
+                            <input type="text" name="last_name" id="last_name" autocomplete="off">
+                            <span class="actions"></span>
+                            <i class="fas fa-user"></i>
+                        </span>
+                        {% if field.help_text %}
+                            <div class="help_text">
+                                <small>{{ field.help_text }}</small>
+                            </div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <div class="error">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% elif field.name == 'email' %}
+                        <label for="email">E-mail</label>
+                        <span class="input">
+                            <input type="email" name="email" id="email" autocomplete="off">
+                            <span class="actions"></span>
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                        {% if field.help_text %}
+                            <div class="help_text">
+                                <small>{{ field.help_text }}</small>
+                            </div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <div class="error">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% elif field.name == 'password1' %}
+                        <label for="password1">Password: </label>
+                        <span class="input">
+                            <input type="password" name="password1" id="password1" autocomplete="off">
+                            <span class="actions"></span>
+                            <i class="fas fa-key"></i>
+                        </span>
+                        {% if field.help_text %}
+                            <div class="help_text">
+                                <small>{{ field.help_text }}</small>
+                            </div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <div class="error">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% elif field.name == 'password2' %}
+                        <label for="password2">Password confirmation: </label>
+                        <span class="input">
+                            <input type="password" name="password2" id="password2" autocomplete="off">
+                            <span class="actions"></span>
+                            <i class="fas fa-key"></i>
+                        </span>
+                        {% if field.help_text %}
+                            <div class="help_text">
+                                <small>{{ field.help_text }}</small>
+                            </div>
+                        {% endif %}
+                        {% for error in field.errors %}
+                            <div class="error">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
                     {% endif %}
-                    {% for error in field.errors %}
-                        <div class="error">
-                            {{ error }}
-                        </div>
-                    {% endfor %}
+                    </span>
                 {% endfor %}
 
-            {% for field in profile_form %}
-                    <div class="form-control">
-                        <p class="name">{{ field.label_tag }}</p>
-                        <p class="input">{{ field }}</p>
-                    </div>
-                    {% if field.help_text %}
-                        <div class="help_text">
-                            <small>{{ field.help_text }}</small>
-                        </div>
-                    {% endif %}
-                    {% for error in field.errors %}
-                        <div class="error">
-                            {{ error }}
-                        </div>
-                    {% endfor %}
+            <div class="upload_pic">
+            <p>Profile picture:</p>
+                {% for field in profile_form %}
+                    {% csrf_token %}
+                    {{ field }}
                 {% endfor %}
             </div>
-            <button class="btn btn-primary" type="submit">Sign up</button>
-            <div><span>Already has account<a href="{% url 'login' %}" style="">Login in here</a></span></div>
-        </form>
-    </div>
+            </p>
 
-    <div id="popup_register" class="modal-body">
-        <form class="popup_register">
-            <div><input type="text" name="firstname" value="" placeholder="Име" class="form-control"></div>
-            <div><input type="text" name="lastname" value="" placeholder="Фамилия" class="form-control"></div>
-            <div><input type="text" name="telephone" value="" placeholder="Телефон" class="customer_phone form-control">
+            <button class="btn-detail" type="submit">Sign up</button>
+            <div class="reg">
+                <span>Already has account?
+                    <a href="{% url 'login' %}" style="">
+                    <p>Login in here</p>
+                    </a>
+                </span>
             </div>
-            <div><input type="text" name="email" value="" placeholder="Е-mail" class="form-control"></div>
-            <div><input type="password" name="password" value="" placeholder="Въведете парола" class="form-control">
-            </div>
-            <div class="customer_group" style="display: none;">
-                <input type="radio" name="customer_group_id" value="1" id="customer_group_id1" checked="checked">
-                <label for="customer_group_id1"></label>
-                <label for="customer_group_id1">Клиенти</label>
-                <br>
-            </div>
-            <div>
-            </div>
-        </form>
-        <div>
-            <button class="register_button btn btn-primary" onclick="send_register();" data-loading-text="Зареждане...">
-                Регистрирай се
-            </button>
-        </div>
-        <div>Вече сте регистриран? <a
-                onclick="$('#modal-register-form').modal('hide'); $('#modal-login-form').modal('show');">Моля, влезте с
-            и-мейл и парола!</a></div>
-    </div>
+        </fieldset>
+    </form>
 {% endblock %}

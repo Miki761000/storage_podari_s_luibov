@@ -2,14 +2,37 @@
 {% load static %}
 
 {% block site_content %}
-    <h1 id="category" class="">Sign up</h1>
-    <div id="menu">
-        <form style="" method="post" action="{% url 'login' %}">
-            <h2>Login</h2>
+    <form class="login" style="" method="post" action="{% url 'login' %}">
+        <fieldset>
+            <legend>Login</legend>
             {% csrf_token %}
-            {{ form }}
-            <button type="submit">Sign up</button>
-            <span>Doesn't have account<a href="{% url 'signup user' %}" style="">Register here</a></span>
-        </form>
-    </div>
+            <p class="field">
+                <label for="user">Username</label>
+                {#                {{ form.username.label }}#}
+                <span class="input">
+                        <input type="text" name="username" id="user" autocomplete="off">
+                        <span class="actions"></span>
+                <i class="fas fa-user"></i>
+                </span>
+            </p>
+            <p class="field">
+                <label for="user">Password</label>
+                {#                {{ form.password.label }}#}
+                <span class="input">
+                        <input type="password" name="password" id="password" autocomplete="off">
+                        <span class="actions"></span>
+                <i class="fas fa-key"></i>
+                </span>
+            </p>
+            <button class="btn-detail" type="submit">Login</button>
+            </div>
+            <div class="reg">
+                <span>Doesn't have account?
+                    <a href="{% url 'signup user' %}" style="">
+                    <p>Register here</p>
+                    </a>
+                </span>
+            </div>
+        </fieldset>
+    </form>
 {% endblock %}

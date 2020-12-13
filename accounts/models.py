@@ -6,14 +6,14 @@ from django.dispatch import receiver
 
 class UserProfile(models.Model):
     profile_picture = models.ImageField(
-        upload_to='users',
+        upload_to='users/',
         blank=True,
     )
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # email_confirmed = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.user.username
+    # def __str__(self):
+    #     return self.user.username
 
 
 # @receiver(post_save, sender=User)

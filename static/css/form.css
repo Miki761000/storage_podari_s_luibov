@@ -42,25 +42,25 @@
     padding: 0 1rem;
 }
 
-input[type="submit"] {
-    background: #846ADD;
-    color: white;
-    padding: 0.5rem 0;
-    cursor: pointer;
-}
+/*input[type="submit"] {*/
+/*    background: #846ADD;*/
+/*    color: white;*/
+/*    padding: 0.5rem 0;*/
+/*    cursor: pointer;*/
+/*}*/
 
-input[type="submit"]:hover {
-    background: #333333;
-}
+/*input[type="submit"]:hover {*/
+/*    background: #333333;*/
+/*}*/
 
-input:focus+i {
-    color: #846ADD;
-    /*border-color: #846ADD;*/
-}
+/*input:focus + i {*/
+/*    color: #846ADD;*/
+/*    !*border-color: #846ADD;*!*/
+/*}*/
 
-.form p:focus-within:before {
-    color: #846ADD;
-}
+/*.form p:focus-within:before {*/
+/*    color: #846ADD;*/
+/*}*/
 
 select.form-control, textarea.form-control, input[type="text"].form-control, input[type="password"].form-control, input[type="datetime"].form-control, input[type="datetime-local"].form-control, input[type="date"].form-control, input[type="month"].form-control, input[type="time"].form-control, input[type="week"].form-control, input[type="number"].form-control, input[type="email"].form-control, input[type="url"].form-control, input[type="search"].form-control, input[type="tel"].form-control, input[type="color"].form-control {
     font-size: 1.0em;
@@ -80,12 +80,13 @@ select.form-control, textarea.form-control, input[type="text"].form-control, inp
 }
 
 .error {
-     color: red;
+    color: red;
 }
 
 .form-control {
     display: flex;
 }
+
 .form-control .name {
     flex-direction: row;
     /*margin: 2% 5% ;*/
@@ -97,4 +98,136 @@ select.form-control, textarea.form-control, input[type="text"].form-control, inp
     flex-direction: row;
     /*margin: 2% 10% ;*/
     /*width: 100%;*/
+}
+
+
+/*login form*/
+body > form {
+    width: 40%;
+    margin: 0 auto;
+    padding: 3em 0;
+}
+
+fieldset,
+fieldset legend {
+    background: rgb(248, 248, 248);
+    border: 1px solid rgb(160, 160, 160);
+    border-radius: 0.4rem;
+    box-shadow: 0 0 3px rgb(99, 99, 99);
+}
+
+fieldset {
+    display: block;
+    position: relative;
+    padding: 5rem;
+}
+
+fieldset legend {
+    position: absolute;
+    top: -1.5rem;
+    left: -0.15rem;
+    padding: 0.1rem 10rem 0.1rem 2rem;
+}
+
+form label {
+    display: block;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+}
+
+.field > label {
+    /*flex: 0 0 8rem;*/
+    padding-right: 0.6rem;
+    text-align: right;
+}
+
+.input {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex: 1 0 auto;
+}
+
+.input input {
+    order: 2;
+    border: none;
+    flex: 1 0 auto;
+    outline: none;
+    padding: 0.3rem 0.6rem;
+    padding-left: 0;
+    position: relative;
+    z-index: 3;
+    background: none;
+}
+
+.input .fas {
+    order: 1;
+    position: relative;
+    z-index: 2;
+    padding: 0.5rem 0.7rem;
+}
+
+.input .actions {
+    border: 1px solid #CCC;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    border-radius: 0.5rem;
+}
+
+.input input:focus + .actions {
+    border: 2px solid #090;
+}
+
+.input input:focus + .actions + .fas {
+    color: #090;
+}
+
+#submit {
+    font-size: 1.2rem;
+    padding: 0.4rem 1.2rem;
+    background: rgb(45, 45, 45);
+    color: #FFF;
+    outline: none;
+    border: none;
+    font-weight: bold;
+    border-radius: 0.2rem;
+}
+
+/*#submit:active {*/
+/*    color: red;*/
+/*}*/
+
+@media screen and (max-width: 1400px) {
+    body > form {
+        width: 80%;
+    }
+
+    .field {
+        display: block;
+    }
+
+    .field > label {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+.reg {
+    padding: 1em 0 0 0;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #f6f3f3 inset;
+    margin: 0.5em;
+}
+
+.upload_pic {
+    margin: 0.5em 0 0.5em 0;
 }

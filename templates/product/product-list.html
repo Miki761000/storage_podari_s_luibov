@@ -2,24 +2,14 @@
 {% load static %}
 
 {% block site_content %}
-    <h1 id="category" class="">Products</h1>
+    <h2 class="">List of Products:</h2>
     <div id="" class="">
-        <a href="{% url 'create product' %}">Add new Product</a>
-        <a href="{% url 'list product' %}">All Products</a>
 
-        {#        <form type="get" action="." style="margin: 0">#}
-        {#            <input id="search_box" type="text" name="search_box" placeholder="Search...">#}
-        {#            <button id="search_submit" type="submit">Submit</button>#}
-        {#        </form>#}
-
-        <form id="myInput" method="get" action="{% url 'list product' %}">
+        <form class="search" id="myInput" method="get" action="{% url 'list product' %}">
             {% csrf_token %}
             {{ filter_form }}
-            <button>Filter</button>
-            {#            <input type="reset" value="Reset">#}
-            {#            <input type="submit" value="Filter">#}
+            <button class="btn-detail">Filter</button>
         </form>
-
 
     </div>
     <div>
@@ -46,10 +36,15 @@
                             <div>Avg. Devivery Price: <p class="price">{{ product.product_delivery_price }}</p></div>
                         </div>
                         <div class="buttons">
-                            <button><a href="{% url 'add quantity product' product.id %}">Change Quantity</a></button>
-                            <button><a href="{% url 'details product' product.id %}">Details</a></button>
-                            <button><a href="{% url 'edit product' product.id %}">Edit</a></button>
-                            <button><a href="{% url 'delete product' product.id %}">Delete</a></button>
+                            <button class="btn-detail"><a class="btn-color-text" href="{% url 'add quantity product' product.id %}">Change
+                                Quantity</a></button>
+                            <button class="btn-detail"><a class="btn-color-text" href="{% url 'details product' product.id %}">Details</a>
+                            </button>
+                            <button class="btn-detail"><a class="btn-color-text" href="{% url 'edit product' product.id %}">Edit</a></button>
+                            {% if request.user.is_superuser == True %}
+                                <button class="btn-delete"><a class="btn-color-text" href="{% url 'delete product' product.id %}">Delete</a>
+                                </button>
+                            {% endif %}
                         </div>
                     </div>
                 {% endfor %}

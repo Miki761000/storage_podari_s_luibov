@@ -3,10 +3,10 @@
     <div class="next">
         Pages:
         {% if products.has_previous %}
-            <a class="prev btn btn-info" href="?page={{ products.previous_page_number }}">Prev</a>
+            <a class="btn-detail prev" href="?page={{ products.previous_page_number }}">Prev</a>
         {% endif %}
         {% if products.has_next %}
-            <a class="next btn btn-info" href="?page={{ products.next_page_number }}">Next</a>
+            <a class="btn-detail next" href="?page={{ products.next_page_number }}">Next</a>
         {% endif %}
     </div>
     {% for pg in page_range %}

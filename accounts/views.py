@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.views.generic import TemplateView
 
 from accounts.forms import UserProfileForm, SignUpForm
 from accounts.models import UserProfile
@@ -35,7 +36,6 @@ class UserProfileView(views.UpdateView):
         context = super().get_context_data(**kwargs)
 
         context['profile_user'] = self.get_object().user
-        # context['pets'] = self.get_object().pet_set.all()
 
         return context
 
@@ -44,16 +44,44 @@ class SignInView(auth_views.LoginView):
     template_name = 'accounts/signin.html'
 
 
-class SignUpView(views.CreateView):
+class RegisterView(TemplateView):
     template_name = 'accounts/signup.html'
-    form_class = SignUpForm
-    success_url = reverse_lazy('current user profile')
 
-    def form_valid(self, form):
-        valid = super().form_valid(form)
-        user = form.save()
-        login(self.request, user)
-        return valid
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['user_form'] = SignUpForm()
+        context['profile_form'] = UserProfileForm()
+        return context
+
+    def post(self, request):
+        user_form = SignUpForm(request.POST)
+        profile_form = UserProfileForm(request.POST, request.FILES)
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+
+            login(request, user)
+            return redirect('index')
+
+        context = {
+            'user_form': SignUpForm(),
+            'profile_form': UserProfileForm(),
+        }
+        return render(request, 'index.html', context)
+
+# class SignUpView(views.CreateView):
+#     template_name = 'accounts/signup.html'
+#     form_class = SignUpForm
+#     success_url = reverse_lazy('current user profile')
+#
+#     def form_valid(self, form):
+#         valid = super().form_valid(form)
+#         user = form.save()
+#         login(self.request, user)
+#         return valid
 
 
 class SignOutView(auth_views.LogoutView):

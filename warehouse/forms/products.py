@@ -26,7 +26,10 @@ class ProductAdditionalInformationForm(forms.ModelForm):
     class Meta:
         model = ProductAdditionalInformation
         fields = '__all__'
-        # exclude = ('product', )
+        # fields = {'product_code', 'product_quantity_add', 'product_quantity_returned',
+        #           'product_quantity_sale', 'product_quantity_waste', 'product_delivery_price_add',
+        #           'document', }
+        # widgets = {'product': forms.HiddenInput}
 
 
 class DeleteProductForm(ProductForm, DisabledFormMixin):

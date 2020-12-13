@@ -118,12 +118,12 @@ input[type='submit'] {
     line-height: 1em;
 }
 
-.gallery button {
-    background: #cccccc;
-    padding: 0.5rem 0.8rem;
-    border-radius: 0.5em;
-    border-color: #cccccc;
-}
+/*.gallery button {*/
+/*    background: #cccccc;*/
+/*    padding: 0.5rem 0.8rem;*/
+/*    border-radius: 0.5em;*/
+/*    border-color: #cccccc;*/
+/*}*/
 
 .product-price {
     display: flex;
@@ -144,4 +144,18 @@ input[type='submit'] {
 .paging .next,
 .paging .pages {
     margin: 0.5em;
+}
+
+#id_text {
+    width: 60%;
+}
+
+#id_order {
+    height: 1.8em;
+    width: 15%;
+}
+
+#myInput > label:nth-child(2),
+#myInput > label:nth-child(4) {
+    padding: 0.5em;
 }

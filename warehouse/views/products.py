@@ -110,12 +110,15 @@ def list_product(request):
     # an iterator. Thus pass it to list, to make our slice possible again.
     page_range = list(paginator.page_range)[start_index:end_index]
 
-    return render(request, 'product/product-list.html', {
+    context = {
         'products': products,
         'current_page': 'home',
         'filter_form': FilterForm(initial=params),
         'page_range': page_range,
-    })
+        # 'can_delete': request.user.is_superuser == True
+    }
+
+    return render(request, 'product/product-list.html', context )
 
 
 @login_required
