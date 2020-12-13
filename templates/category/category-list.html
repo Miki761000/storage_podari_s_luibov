@@ -2,25 +2,31 @@
 {% load static %}
 
 {% block site_content %}
-    <h1 id="category" class="">Categories</h1>
-    <a href="{% url 'create category'%}">Add new Category</a>
-    <div id="menu" class="">
+    <h2 class="">List of Categories:</h2>
+    <div id="" class="">
         {% if categories %}
-            <table>
-                <tr>
-                    <th>Category name</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-
+            <ul>
                 {% for category in categories %}
-                    <tr>
-                        <th class="">{{ category.category_name }}</th>
-                        <th><a href="{% url 'edit category' category.id %}">Edit</a></th>
-                        <th><a href="{% url 'delete category' category.id %}">Delete</a></th>
-                    </tr>
+                    <li>
+                        <div class="list">
+                            <div class="list-name">
+                                <p>{{ category.category_name }}</p>
+                            </div>
+                            <div class="edit-delete">
+                                <div class="edit-delete-edit">
+                                    <button class="btn-detail"><a href="{% url 'edit category' category.id %}">Edit</a>
+                                    </button>
+                                </div>
+                                <div class="edit-delete-delete">
+                                    <button class="btn-delete"><a
+                                            href="{% url 'delete category' category.id %}">Delete</a>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
                 {% endfor %}
-            </table>
+            </ul>
         {% endif %}
     </div>
 {% endblock %}

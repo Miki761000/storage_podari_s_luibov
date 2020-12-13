@@ -2,21 +2,20 @@
 {% load static %}
 
 {% block site_content %}
-    <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <h1>Are you sure you want to delete {{ category.category_name }}?</h1>
-            <div class="m-2">
-                <form method="post" action="{% url 'delete category' category.id %}">
-                    {% csrf_token %}
-                    <button class="btn btn-danger">
-                        Confirm
-                    </button>
-                </form>
-            </div>
-            <div class="m-2">
-                <a class="btn btn-primary" href="javascript:history.back()">No, go back</a>
-            </div>
-        </div>
-    </div>
+    <form class="login" style="" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Delete:</legend>
+            {% csrf_token %}
+            <p class="field1">
+            <h3>Are you sure you want to delete: </h3>
+            <h1>{{ category.category_name }}?</h1>
+            <p method="post" action="{% url 'delete category' category.id %}">
+                {% csrf_token %}
+                <button class="btn-delete">
+                    Confirm
+                </button>
+                <a class="btn-detail-border" href="javascript:history.back()">No, go back</a>
+            </p>
+        </fieldset>
+    </form>
 {% endblock %}

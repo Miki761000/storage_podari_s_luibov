@@ -2,18 +2,17 @@
 {% load static %}
 
 {% block site_content %}
-    <h1 class="text-center">Add new Category</h1>
-    <div class="row">
-        <div class="col-lg-6">
-            <form method="post" class="furniture-form" action="{% url 'create category' %}">
-                {% csrf_token %}
-
-                {{ form.category_name.label }}
-                {{ form.category_name }}
-                {{ form.category_name.errors }}
-
-                <button class="btn btn-primary mt-2" type="submit">Create</button>
-            </form>
-        </div>
-    </div>
+    <form class="login" action="{% url 'create category' %}" method="POST" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Create new Category</legend>
+            {% csrf_token %}
+            <p class="field1">
+                <label for="category_name">{{ form.category_name.label }}: </label>
+                <span class="input">
+                    {{ form.category_name }}
+                </span>
+            </p>
+            <button class="btn-detail" type="submit">Create</button>
+        </fieldset>
+    </form>
 {% endblock %}

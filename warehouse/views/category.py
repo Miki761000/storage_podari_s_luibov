@@ -24,6 +24,9 @@ class CategoryListView(views.ListView):
     template_name = 'category/category-list.html'
     context_object_name = 'categories'
 
+    def get_queryset(self):
+        return Category.objects.order_by('category_name')
+
 
 # @method_decorator(groups_required(groups=['Regular User', 'Super User']), name='dispatch')
 @method_decorator(login_required, name='dispatch')

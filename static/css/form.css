@@ -200,6 +200,10 @@ form label {
     border-radius: 0.2rem;
 }
 
+#user {
+    width: 80%;
+    padding: 0.2em;
+}
 /*#submit:active {*/
 /*    color: red;*/
 /*}*/
@@ -230,4 +234,75 @@ input:-webkit-autofill {
 
 .upload_pic {
     margin: 0.5em 0 0.5em 0;
+}
+
+.field-label {
+    display: flex;
+    flex: 0 0 30%;
+}
+
+select {
+    width: 100%;
+}
+
+.pic {
+    margin: 0.5em;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+.img-product {
+    margin: 1em 0;
+}
+
+.list,
+.edit-delete {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+
+}
+
+div.list-name > p {
+    padding: 0.5em;
+}
+
+.list-name,
+.edit-delete {
+    width: 50%;
+}
+
+.list-name {
+    text-align: end;
+    padding-right: 1em;
+}
+
+.edit-delete-edit,
+.edit-delete-delete {
+    padding: 0.1em 0.3em;
+    color: white;
+}
+
+div.edit-delete-edit > button > a,
+div.edit-delete-delete > button > a{
+    color: var(--color-main-link);
+}
+
+.btn-detail-border {
+    border: 1px solid var(--color-nav-bgrd);
+    padding: 0.65em;
+    border-radius: 0.4em;
+    background-color: var(--color-nav-bgrd);
+    color: var(--color-main-link);
+    list-style-type: none ;
+}
+
+* {
+    text-decoration: none ;
 }

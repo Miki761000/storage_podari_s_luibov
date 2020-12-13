@@ -2,35 +2,44 @@
 {% load static %}
 
 {% block site_content %}
-    <h1 class="text-center">Add new Product</h1>
-    <div class="row">
-        <div class="col-lg-6">
-            <form action="{% url 'create product' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
+    <form class="login" action="{% url 'create product' %}" method="POST" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Create new Product</legend>
+            {% csrf_token %}
+            <p class="field1">
 
-                {{ form.product_type.label }}
-                {{ form.product_type }}
-                {{ form.product_type.errors }}
+                <label for="product_type">{{ form.product_type.label }}: </label>
+                <span class="input">
+                    {{ form.product_type }}
+                </span>
 
-                {{ form.product_code.label }}
-                {{ form.product_code }}
-                {{ form.product_code.errors }}
+                <label for="product_code">{{ form.product_code.label }}: </label>
+                <span class="input">
+                    <input type="text" name="product_code" id="product_code" autocomplete="off">
+                    <span class="actions"></span>
+                </span>
 
-                {{ form.product_name.label }}
-                {{ form.product_name }}
-                {{ form.product_name.errors }}
+                <label for="product_name">{{ form.product_name.label }}: </label>
+                <span class="input">
+                    <input type="text" name="product_name" id="product_name" autocomplete="off">
+                    <span class="actions"></span>
+                </span>
 
-                {{ form.product_description.label }}
-                {{ form.product_description }}
-                {{ form.product_description.errors }}
+                <label for="product_description">{{ form.product_description.label }}: </label>
+                <span class="input">
+                    <input type="text" name="product_description" id="product_description"
+                              placeholder="Write description.." ></textarea>
+                    <span class="actions"></span>
+                </span>
 
-                {{ form.product_image.label }}
+            <p class="pic">
+                {{ form.product_image.label }}:
+            </p>
+            <p>
                 {{ form.product_image }}
                 {{ form.product_image.errors }}
-
-
-                <button class="btn btn-primary mt-2" type="submit">Create</button>
-            </form>
-        </div>
-    </div>
+            </p>
+            <button class="btn-detail" type="submit">Create</button>
+        </fieldset>
+    </form>
 {% endblock %}
