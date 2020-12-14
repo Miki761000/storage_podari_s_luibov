@@ -1,11 +1,12 @@
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
+from django.db.models.functions import Lower
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic as views
-from django.views.generic import FormView
+from django.views.generic import FormView, CreateView
 from django.contrib.auth import mixins as auth_mixins
 
 from accounts.decorators import user_required, superuser_required
@@ -21,7 +22,7 @@ from warehouse.views.common import calculate_quantity_and_price
 class ProductCreateView(FormView):
     form_class = ProductForm
     template_name = 'product/product-create.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('list product')
 
     def form_valid(self, form):
         form.save()
@@ -40,9 +41,10 @@ class UpdateProductView(auth_mixins.LoginRequiredMixin, views.UpdateView):
         return url_list
 
     def form_valid(self, form):
-        old_image = self.get_object().image
-        if old_image:
-            clean_up_files(old_image.path)
+        # old_image = self.get_object().image
+        # if old_image:
+        #     clean_up_files(old_image.path)
+        form.save()
         return super().form_valid(form)
 
 
@@ -77,16 +79,16 @@ def details_product(request, pk):
 def list_product(request):
     params = extract_filter_values(request.GET)
     order_by = 'product_name' if params['order'] == FilterForm.ORDER_ASC else '-product_name'
-    products = Product.objects.filter(product_name__icontains=params['text']).order_by(order_by) | \
-               Product.objects.filter(product_code__icontains=params['text']).order_by(order_by) | \
-               Product.objects.filter(product_description__icontains=params['text']).order_by(order_by) | \
-               Product.objects.filter(product_type__category_name__icontains=params['text']).order_by(order_by)
+    products = Product.objects.filter(product_name__icontains=params['text']).order_by('product_name') | \
+               Product.objects.filter(product_code__icontains=params['text']).order_by('product_name') | \
+               Product.objects.filter(product_description__icontains=params['text']).order_by('product_name') | \
+               Product.objects.filter(product_type__category_name__icontains=params['text']).order_by('product_name')
 
     for product in products:
         quantities = ProductAdditionalInformation.objects.all()
         product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.product_code, product, quantities)
 
-    items_per_page = 9
+    items_per_page = 6
     paginator = Paginator(products, items_per_page)
 
     try:
@@ -125,7 +127,7 @@ def list_product(request):
 # @superuser_required()
 def add_quantity_product(request, pk):
     product = Product.objects.get(pk=pk)
-
+    pr_code = product.product_code
     if request.method == 'GET':
         context = {
             'product': product,
@@ -148,6 +150,15 @@ def add_quantity_product(request, pk):
         }
 
     return render(request, 'product/product-add-quantity.html', context)
+
+
+from django import template
+register = template.Library()
+
+
+@register.filter
+def sort_by(queryset, order):
+    return queryset.order_by(order)
 
 
 # @login_required

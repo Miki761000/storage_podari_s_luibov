@@ -2,52 +2,69 @@
 {% load static %}
 
 {% block site_content %}
-    <h1 class="text-center">Product Change Quantity:</h1>
-    <div class="row">
-        <div class="col-lg-3"></div>
-        <div class="col-lg-6">
-            <form action="{% url 'add quantity product' product.id %}"
-                  method="post" class="furniture-form" enctype="multipart/form-data">
-                {% csrf_token %}
+    <form action="{% url 'add quantity product' product.id %}"
+          method="post" class="furniture-form" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Change Quantity of Product</legend>
+            {% csrf_token %}
+            <p class="field1">
+                <label for="product">Product: </label>
+                <span class="input">
+                    {{ form_quantity.product }}
+                </span>
+                <label for="product_code">Product Code: </label>
+                <span class="input">
+{#                    {{ form_quantity.product.product_code }}#}
+                    <input type="text" name="product_code" id="product_code">
+                    <span class="actions"></span>
+                </span>
+                <label for="document">Document: </label>
+                <span class="input">
+                    <input type="text" name="document" id="document">
+                    <span class="actions"></span>
+                </span>
+                <div class="quantity">
+            <p><b>Increase Quantity:</b></p>
+            <div class="add-quantity">
+                <div class="name-quantity">
+                    <label for="product_quantity_add">Delivered: </label>
+                </div>
+                <span class="input1">{{ form_quantity.product_quantity_add }}</span>
 
-                {{ form_quantity.label_suffix }}
-                {{ form_quantity }}
-                {{ form_quantity.errors }}
-
-{#                {{ form.product_type.label }}#}
-{#                {{ form.product_type }}#}
-{##}
-{#                {{ form.product_code.label }}#}
-{#                {{ form.product_code }}#}
-{##}
-{#                {{ form.product_name.label }}#}
-{#                {{ form.product_name }}#}
-
-                {{ form.product_image.label }}
-                <img id="img_preview" class="card-img-top" src="{{ product.product_image.url }}"
-                     alt="{{ product.product_name }}">
-
-                <button class="btn btn-primary mt-2" type="submit">Change Quantity</button>
-            </form>
-        </div>
-        <div class="col-lg-3">
-            <div class="content">
-            <div class="buttons-container">
-                <a class="button edit" href="{% url 'list product' %}">All Products</a>
+                <div class="name-quantity">
+                    <label for="product_quantity_returned">Returned : </label>
+                </div>
+                <span class="input1">{{ form_quantity.product_quantity_returned }}</span>
             </div>
-        </div>
-        </div>
-    </div>
+            <div>
+                <div class="add-quantity">
+                    <div class="name-quantity">
+                        <label for="product_delivery_price_add">Add Delivery Price: </label>
+                    </div>
+                    <span class="input1">{{ form_quantity.product_delivery_price_add }}</span>
+                </div>
+            </div>
+            <p><b>Decrease Quantity:</b></p>
+            <div class="sale-quantity">
+                <div class="name-quantity">
+                    <label for="product_quantity_sale">Add Sales: </label>
+                </div>
+                <span class="input1">{{ form_quantity.product_quantity_sale }}</span>
 
-    <script>
-        function updateImage() {
-            let img = document.getElementById('img_preview');
-            let url = this.value;
-            img.src = url;
-        }
+                <div class="name-quantity">
+                    <label for="product_quantity_waste">Add Waste: </label>
+                </div>
+                <span class="input1">{{ form_quantity.product_quantity_waste }}</span>
+            </div>
+            </div>
+            </p>
+            <div class="buttons">
+                <button class="btn-edit" type="submit">Save</button>
+                <a class="btn-detail-border" href="javascript:history.back()">Back</a>
+            </div>
+            <img id="img-detail" class="img-detail" src="{{ product.product_image.url }}"
+                 alt="{{ product.product_name }}">
 
-        document.getElementById('img_input')
-            .addEventListener('input', updateImage);
-    </script>
-
+        </fieldset>
+    </form>
 {% endblock %}

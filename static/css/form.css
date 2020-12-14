@@ -204,6 +204,7 @@ form label {
     width: 80%;
     padding: 0.2em;
 }
+
 /*#submit:active {*/
 /*    color: red;*/
 /*}*/
@@ -250,11 +251,11 @@ select {
 }
 
 input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
 }
 
 .img-product {
@@ -290,7 +291,7 @@ div.list-name > p {
 }
 
 div.edit-delete-edit > button > a,
-div.edit-delete-delete > button > a{
+div.edit-delete-delete > button > a {
     color: var(--color-main-link);
 }
 
@@ -300,9 +301,42 @@ div.edit-delete-delete > button > a{
     border-radius: 0.4em;
     background-color: var(--color-nav-bgrd);
     color: var(--color-main-link);
-    list-style-type: none ;
+    list-style-type: none;
 }
 
 * {
-    text-decoration: none ;
+    text-decoration: none;
+}
+
+.btn-detail-border1 {
+    border: 1px solid var(--color-nav-bgrd);
+    padding: 0.4em;
+    border-radius: 0.4em;
+    background-color: var(--color-nav-bgrd);
+    color: var(--color-main-link);
+    list-style-type: none;
+}
+
+.quantity .add-quantity {
+    padding: 1em 0.5em;
+    display: flex;
+    flex-direction: row;
+    /*border: 1px solid var(--color-main-bgrd-special)*/
+}
+
+.quantity .sale-quantity {
+    margin: 0.5em 0;
+    padding: 1em 0.5em;
+    display: flex;
+    flex-direction: row;
+    /*border: 1px solid var(--color-main-bgrd-special)*/
+}
+
+.name-quantity {
+    padding: 0 0.5em;
+    margin: 0 0.5em;
+}
+
+.btn-detail-margin {
+    margin: 2em;
 }

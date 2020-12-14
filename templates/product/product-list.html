@@ -7,7 +7,7 @@
 
         <form class="search" id="myInput" method="get" action="{% url 'list product' %}">
             {% csrf_token %}
-            {{ filter_form }}
+            {{ filter_form.text }}
             <button class="btn-detail">Filter</button>
         </form>
 
@@ -40,7 +40,7 @@
                                 Quantity</a></button>
                             <button class="btn-detail"><a class="btn-color-text" href="{% url 'details product' product.id %}">Details</a>
                             </button>
-                            <button class="btn-detail"><a class="btn-color-text" href="{% url 'edit product' product.id %}">Edit</a></button>
+                            <button class="btn-edit-margin"><a class="btn-color-text" href="{% url 'edit product' product.id %}">Edit</a></button>
                             {% if request.user.is_superuser == True %}
                                 <button class="btn-delete"><a class="btn-color-text" href="{% url 'delete product' product.id %}">Delete</a>
                                 </button>

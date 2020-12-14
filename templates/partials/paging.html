@@ -1,21 +1,20 @@
 {% load static %}
 <div class="paging">
     <div class="next">
-        Pages:
         {% if products.has_previous %}
-            <a class="btn-detail prev" href="?page={{ products.previous_page_number }}">Prev</a>
+            <a class="btn-detail2-prev" href="?page={{ products.previous_page_number }}">Prev</a>
+            {% for pg in page_range %}
+                <div class="pages">
+                    {% if products.number == pg %}
+                        <a href="?page={{ pg }}" class="btn btn-default">{{ pg }}</a>
+                    {% else %}
+                        <a href="?page={{ pg }}" class="btn">{{ pg }}</a>
+                    {% endif %}
+                </div>
+            {% endfor %}
         {% endif %}
         {% if products.has_next %}
-            <a class="btn-detail next" href="?page={{ products.next_page_number }}">Next</a>
+            <a class="btn-detail-next" href="?page={{ products.next_page_number }}">Next</a>
         {% endif %}
     </div>
-    {% for pg in page_range %}
-        <div class="pages">
-            {% if products.number == pg %}
-                <a href="?page={{ pg }}" class="btn btn-default">{{ pg }}</a>
-            {% else %}
-                <a href="?page={{ pg }}" class="btn">{{ pg }}</a>
-            {% endif %}
-        </div>
-    {% endfor %}
 </div>

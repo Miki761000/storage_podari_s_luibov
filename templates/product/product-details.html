@@ -2,29 +2,37 @@
 {% load static %}
 
 {% block site_content %}
-    <h1>{{ product.product_name }}</h1>
-    <div class="items-container">
-        <div class="item">
+    <h2>{{ product.product_name }}</h2>
+    <div class="gallery1">
+        <div class="location-image1">
             <div class="recipe-info-full">
-                {{ product.product_type }}
-                {{ product.product_code }}
-                {{ product.product_name }}
-                {{ product.product_description }}
-                <img class="card-img-top" src="{{ product.product_image.url }}"
-                     alt="{{ product.product_name }}">
-                {{ product.product_quantity }}
-                {{ product.product_delivery_price }}
-            </div>
-            <div class="content">
-                <div class="buttons-container">
-                    <a href="{% url 'add quantity product' product.id %}">Change Quantity</a>
-                    <a class="button edit" href="{% url 'list product' %}">All Products</a>
-                    <a class="button edit" href="{% url 'edit product' product.id %}">Edit</a>
-                    <a class="button delete" href="{% url 'delete product' product.id %}">Delete</a>
+                <div class="title1">
+                    <h5>Product Type: {{ product.product_type }}</h5>
+                    <h5>Product Code: {{ product.product_code }}</h5>
+                    <p class="text-detail">{{ product.product_description }}</p>
                 </div>
+                <div class="buttons1">
+                    <button class="btn-detail"><a class="btn-color-text"
+                                                  href="{% url 'add quantity product' product.id %}">Change
+                        Quantity</a></button>
+                    <button class="btn-edit"><a class="btn-color-text"
+                                                  href="{% url 'edit product' product.id %}">Edit</a>
+                    </button>
+                    <a class="btn-detail-border1" href="javascript:history.back()">Back</a>
+                    {% if request.user.is_superuser == True %}
+                        <button class="btn-delete"><a class="btn-color-text"
+                                                      href="{% url 'delete product' product.id %}">Delete</a>
+                        </button>
+                    {% endif %}
+                </div>
+
+                <div class="product-price">
+                    <div>Quantity: <p class="price">{{ product.product_quantity }}</p></div>
+                    <div>Avg. Devivery Price: <p class="price">{{ product.product_delivery_price }}</p></div>
+                </div>
+                <div class="img-detail"><img class="" src="{{ product.product_image.url }}"
+                                             alt="{{ product.product_name }}"></div>
             </div>
         </div>
-    </div>
-
     </div>
 {% endblock %}

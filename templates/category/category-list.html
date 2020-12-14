@@ -14,13 +14,15 @@
                             </div>
                             <div class="edit-delete">
                                 <div class="edit-delete-edit">
-                                    <button class="btn-detail"><a href="{% url 'edit category' category.id %}">Edit</a>
+                                    <button class="btn-edit"><a href="{% url 'edit category' category.id %}">Edit</a>
                                     </button>
                                 </div>
-                                <div class="edit-delete-delete">
+                                {% if request.user.is_superuser == True %}
+                                    <div class="edit-delete-delete">
                                     <button class="btn-delete"><a
                                             href="{% url 'delete category' category.id %}">Delete</a>
                                     </button>
+                                {% endif %}
                                 </div>
                             </div>
                         </div>

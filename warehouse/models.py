@@ -27,6 +27,7 @@ class Product(models.Model):
         blank=True,
         null=True,
     )
+
     product_type = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     def __str__(self):

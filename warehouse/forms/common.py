@@ -20,7 +20,6 @@ class FilterForm(forms.Form):
     text = forms.CharField(
         required=False,
     )
-
     order = forms.ChoiceField(
         choices=ORDER_CHOICES,
         required=False,

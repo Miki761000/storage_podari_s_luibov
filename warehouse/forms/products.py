@@ -9,17 +9,13 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = '__all__'
-
-        class Meta:
-            model = Product
-            fields = '__all__'
-            field_order = [
-                'product_name',
-                'product_code',
-                'product_quantity',
-                'product_type',
-                'product_id',
-            ]
+        field_order = [
+            'product_name',
+            'product_code',
+            'product_quantity',
+            'product_type',
+            'product_id',
+        ]
 
 
 class ProductAdditionalInformationForm(forms.ModelForm):
@@ -36,3 +32,5 @@ class DeleteProductForm(ProductForm, DisabledFormMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         DisabledFormMixin.__init__(self)
+
+
