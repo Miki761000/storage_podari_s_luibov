@@ -1,0 +1,44 @@
+{% extends 'shared/site.html' %}
+{% load static %}
+
+{% block site_content %}
+    <h2 class="">List of Products in category: "{{ category.category_name }}"</h2>
+    <div id="" class="">
+        {% if products %}
+            <ul>
+                {% for product in products %}
+                    <li>
+                        <div class="list">
+                            <div class="list-name">
+                                <a href="{% url 'details product' product.id %}">
+                                    <p>{{ product.product_name }}</p>
+                                </a>
+                            </div>
+                            <div class="buttons2">
+                                <button class="btn-detail"><a class="btn-color-text"
+                                                              href="{% url 'add quantity product' product.id %}">Change
+                                    Quantity</a></button>
+                                <button class="btn-detail"><a class="btn-color-text"
+                                                              href="{% url 'details product' product.id %}">Details</a>
+                                </button>
+                                <button class="btn-edit-margin"><a class="btn-color-text"
+                                                                   href="{% url 'edit product' product.id %}">Edit</a>
+                                </button>
+                                {% if request.user.is_superuser == True %}
+                                    <button class="btn-delete"><a class="btn-color-text"
+                                                                  href="{% url 'delete product' product.id %}">Delete</a>
+                                    </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h6>No Products in this category</h6>
+        {% endif %}
+        <div class="buttons">
+            <a class="btn-detail-border" href="javascript:history.back()">Back</a>
+        </div>
+    </div>
+{% endblock %}

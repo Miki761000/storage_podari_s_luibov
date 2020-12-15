@@ -11,6 +11,9 @@
                     <div class="nav-items">
                         <a class="nav-link" href="{% url 'signout user' %}">Log out</a>
                     </div>
+                    <div class="nav-items">
+                        <a class="nav-link" href="{% url 'signup user' %}">Register</a>
+                    </div>
                 {% else %}
                     <div id="account" class="delivery">
                         <i class="fa fa-user"></i>
@@ -41,17 +44,17 @@
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
+                    <li><a href="{% url 'list product' %}">Products</a>
+                        <ul>
+                            <li><a href="{% url 'list product' %}">List of products</a></li>
+                            <li><a href="{% url 'create product' %}">Create new product</a></li>
+                        </ul>
                     <li><a href="{% url 'list category' %}">Categories</a>
                         <ul>
                             <li><a href="{% url 'list category' %}">List of categories</a></li>
                             <li><a href="{% url 'create category' %}">Create new category</a></li>
                         </ul>
                     </li>
-                    <li><a href="{% url 'list product' %}">Products</a>
-                        <ul>
-                            <li><a href="{% url 'list product' %}">List of products</a></li>
-                            <li><a href="{% url 'create product' %}">Create new product</a></li>
-                        </ul>
                     </li>
 {#                    <li><a href="#">Reports</a>#}
 {##}

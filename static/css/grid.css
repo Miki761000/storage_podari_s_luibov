@@ -32,6 +32,13 @@ input[type='submit'] {
         box-sizing: border-box;
         align-items: center;
     }
+
+    .buttons2 {
+        margin: .1em 0;
+        display: block;
+        box-sizing: border-box;
+        align-items: center;
+    }
 }
 
 @media screen and (min-width: 800px) {
@@ -52,6 +59,13 @@ input[type='submit'] {
         box-sizing: border-box;
         align-items: center;
     }
+
+    .buttons2 {
+        margin: .1em 0;
+        display: block;
+        box-sizing: border-box;
+        align-items: center;
+    }
 }
 
 @media screen and (min-width: 1400px) {
@@ -68,6 +82,13 @@ input[type='submit'] {
 
     .buttons {
         margin: 5% 10%;
+        display: block;
+        box-sizing: border-box;
+        align-items: center;
+    }
+
+    .buttons2 {
+        margin: .1em 0;
         display: block;
         box-sizing: border-box;
         align-items: center;
@@ -117,13 +138,6 @@ input[type='submit'] {
     color: var(--color-main-text);
     line-height: 1em;
 }
-
-/*.gallery button {*/
-/*    background: #cccccc;*/
-/*    padding: 0.5rem 0.8rem;*/
-/*    border-radius: 0.5em;*/
-/*    border-color: #cccccc;*/
-/*}*/
 
 .product-price {
     display: flex;

@@ -10,15 +10,26 @@ from django.views.generic import FormView, DeleteView, DetailView
 from django.contrib.auth import mixins as auth_mixins
 from django.views import generic as views
 
-from accounts.decorators import user_required, superuser_required
 from common.decorators import groups_required
-from common.view_mixins import GroupRequiredMixin, UserRequiredMixin
-from core.clean_up import clean_up_files
 from warehouse.forms.category import CategoryForm, DeleteCategoryForm
-from warehouse.forms.common import extract_filter_values
-from warehouse.models import Category
+from warehouse.models import Category, Product
 
 
+@login_required
+def details_category(request, pk):
+    category = Category.objects.get(pk=pk)
+    category_id = category.id
+    product = Product.objects.filter(product_type=category_id)
+
+    context = {
+        'products': product,
+        'category': category,
+    }
+
+    return render(request, 'category/category-detail.html', context)
+
+
+@method_decorator(login_required, name='dispatch')
 class CategoryListView(views.ListView):
     model = Category
     template_name = 'category/category-list.html'

@@ -9,11 +9,11 @@
             {% csrf_token %}
             <p class="field1">
 
-                {{ form.product_type.label }}:
+                Category:
                 {{ form.product_type }}
 
                 {{ form.product_code.label }}:
-                {{ form.product_code }}
+                <input type="text" name="product_code" id="product_code" value="{{ product.product_code }}" readonly>
 
                 {{ form.product_name.label }}:
                 {{ form.product_name }}

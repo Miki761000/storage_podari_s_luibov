@@ -1,10 +1,10 @@
 from django.urls import path
 
-from warehouse.views.index import IndexPage, get_private_file, get_public_file
+from warehouse.views.index import IndexPage
 from warehouse.views.category import CategoryCreateView, DeleteCategoryView, \
-    UpdateCategoryView, CategoryListView
+    UpdateCategoryView, CategoryListView, details_category
 from warehouse.views.products import ProductCreateView, DeleteProductView, UpdateProductView, \
-    add_quantity_product, details_product, list_product  # ProductListView,
+    add_quantity_product, details_product, list_product
 
 urlpatterns = [
     path('', IndexPage.as_view(), name='index'),
@@ -13,6 +13,7 @@ urlpatterns = [
     path('create_category/', CategoryCreateView.as_view(), name='create category'),
     path('category/edit/<int:pk>/', UpdateCategoryView.as_view(), name='edit category'),
     path('category/delete/<int:pk>/', DeleteCategoryView.as_view(), name='delete category'),
+    path('category/details/<int:pk>/', details_category, name='details category'),
 
     # path('list_product/', ProductListView.as_view(), name='list product'),
     path('list_product/', list_product, name='list product'),

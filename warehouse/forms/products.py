@@ -1,4 +1,5 @@
 from django import forms
+from django.db import models
 
 from warehouse.forms.common import DisabledFormMixin
 from warehouse.models import Product, ProductAdditionalInformation
@@ -16,16 +17,13 @@ class ProductForm(forms.ModelForm):
             'product_type',
             'product_id',
         ]
+        product_code = forms.CharField(disabled=True)
 
 
 class ProductAdditionalInformationForm(forms.ModelForm):
     class Meta:
         model = ProductAdditionalInformation
         fields = '__all__'
-        # fields = {'product_code', 'product_quantity_add', 'product_quantity_returned',
-        #           'product_quantity_sale', 'product_quantity_waste', 'product_delivery_price_add',
-        #           'document', }
-        # widgets = {'product': forms.HiddenInput}
 
 
 class DeleteProductForm(ProductForm, DisabledFormMixin):

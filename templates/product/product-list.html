@@ -2,15 +2,13 @@
 {% load static %}
 
 {% block site_content %}
-    <h2 class="">List of Products:</h2>
+    <h2 class="">List of Products: {{ products }}</h2>
     <div id="" class="">
-
         <form class="search" id="myInput" method="get" action="{% url 'list product' %}">
             {% csrf_token %}
             {{ filter_form.text }}
             <button class="btn-detail">Filter</button>
         </form>
-
     </div>
     <div>
         {% if not products %}
@@ -26,23 +24,26 @@
                         <div class="title">
                             <h4>{{ product.product_name }}</h4>
                             <h5>Product Code: <p class="price">{{ product.product_code }}</p></h5>
-                            <h5>Product Type: {{ product.product_type }}</h5>
+                            <h5>Category: {{ product.product_type }}</h5>
                         </div>
                         <div><img class="" src="{{ product.product_image.url }}" alt="{{ product.product_name }}"></div>
-                        {#                        <img class="card-img-top" src="{% url 'public file' product.product_image.url %}"#}
-                        {#                             alt="{{ product.product_name }}">#}
                         <div class="product-price">
                             <div>Quantity: <p class="price">{{ product.product_quantity }}</p></div>
                             <div>Avg. Devivery Price: <p class="price">{{ product.product_delivery_price }}</p></div>
                         </div>
                         <div class="buttons">
-                            <button class="btn-detail"><a class="btn-color-text" href="{% url 'add quantity product' product.id %}">Change
+                            <button class="btn-detail"><a class="btn-color-text"
+                                                          href="{% url 'add quantity product' product.id %}">Change
                                 Quantity</a></button>
-                            <button class="btn-detail"><a class="btn-color-text" href="{% url 'details product' product.id %}">Details</a>
+                            <button class="btn-detail"><a class="btn-color-text"
+                                                          href="{% url 'details product' product.id %}">Details</a>
                             </button>
-                            <button class="btn-edit-margin"><a class="btn-color-text" href="{% url 'edit product' product.id %}">Edit</a></button>
+                            <button class="btn-edit-margin"><a class="btn-color-text"
+                                                               href="{% url 'edit product' product.id %}">Edit</a>
+                            </button>
                             {% if request.user.is_superuser == True %}
-                                <button class="btn-delete"><a class="btn-color-text" href="{% url 'delete product' product.id %}">Delete</a>
+                                <button class="btn-delete"><a class="btn-color-text"
+                                                              href="{% url 'delete product' product.id %}">Delete</a>
                                 </button>
                             {% endif %}
                         </div>

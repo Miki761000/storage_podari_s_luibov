@@ -8,12 +8,9 @@
             {% csrf_token %}
             <p class="field1">
 
-                <label for="product_type">{{ form.product_type.label }}: </label>
+                <label for="product_type">Category: </label>
                 <span class="input">
                 {{ form.product_type}}
-{#                    {% for product_type in form.product_type|sort_by %}#}
-{#                        {{ product_type|sort_by }}#}
-{#                    {% endfor %}#}
                 </span>
 
                 <label for="product_code">{{ form.product_code.label }}: </label>

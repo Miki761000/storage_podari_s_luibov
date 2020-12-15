@@ -10,7 +10,10 @@
                     <li>
                         <div class="list">
                             <div class="list-name">
-                                <p>{{ category.category_name }}</p>
+                                <a href="{% url 'details category' category.id %}">
+                                    <p>{{ category.category_name }}</p>
+                                </a>
+
                             </div>
                             <div class="edit-delete">
                                 <div class="edit-delete-edit">
@@ -30,5 +33,8 @@
                 {% endfor %}
             </ul>
         {% endif %}
+        <div class="buttons">
+            <a class="btn-detail-border" href="javascript:history.back()">Back</a>
+        </div>
     </div>
 {% endblock %}

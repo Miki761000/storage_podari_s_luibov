@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    {% for category in categories %}
+        <li>
+            {{ category.category_name }}
+        </li>
+    {% endfor %}
+</ul>
+<form method="post" action="{% url 'create category' %}">
+    {{ form }}
+    {% csrf_token %}
+    <button>Create</button>
+</form>
+</body>
+</html>

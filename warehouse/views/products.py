@@ -1,7 +1,5 @@
-from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.db.models.functions import Lower
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
@@ -11,7 +9,6 @@ from django.contrib.auth import mixins as auth_mixins
 
 from accounts.decorators import user_required, superuser_required
 from common.decorators import groups_required
-from core.clean_up import clean_up_files
 from warehouse.forms.common import FilterForm, extract_filter_values
 from warehouse.forms.products import ProductForm, DeleteProductForm, ProductAdditionalInformationForm
 from warehouse.models import Product, ProductAdditionalInformation
@@ -36,14 +33,11 @@ class UpdateProductView(auth_mixins.LoginRequiredMixin, views.UpdateView):
     form_class = ProductForm
 
     def get_success_url(self):
-        url = reverse_lazy('edit product', kwargs={'pk': self.object.id})
+        # url = reverse_lazy('edit product', kwargs={'pk': self.object.id})
         url_list = reverse_lazy('list product')
         return url_list
 
     def form_valid(self, form):
-        # old_image = self.get_object().image
-        # if old_image:
-        #     clean_up_files(old_image.path)
         form.save()
         return super().form_valid(form)
 
@@ -68,8 +62,6 @@ def details_product(request, pk):
 
     context = {
         'product': product,
-        'form': ProductForm(instance=product),
-        'form_quantity': ProductAdditionalInformationForm(instance=product),
     }
 
     return render(request, 'product/product-details.html', context)
@@ -117,7 +109,6 @@ def list_product(request):
         'current_page': 'home',
         'filter_form': FilterForm(initial=params),
         'page_range': page_range,
-        # 'can_delete': request.user.is_superuser == True
     }
 
     return render(request, 'product/product-list.html', context )
@@ -151,14 +142,6 @@ def add_quantity_product(request, pk):
 
     return render(request, 'product/product-add-quantity.html', context)
 
-
-from django import template
-register = template.Library()
-
-
-@register.filter
-def sort_by(queryset, order):
-    return queryset.order_by(order)
 
 
 # @login_required
