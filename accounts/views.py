@@ -72,17 +72,6 @@ class RegisterView(TemplateView):
         }
         return render(request, 'index.html', context)
 
-# class SignUpView(views.CreateView):
-#     template_name = 'accounts/signup.html'
-#     form_class = SignUpForm
-#     success_url = reverse_lazy('current user profile')
-#
-#     def form_valid(self, form):
-#         valid = super().form_valid(form)
-#         user = form.save()
-#         login(self.request, user)
-#         return valid
-
 
 class SignOutView(auth_views.LogoutView):
     next_page = reverse_lazy('index')

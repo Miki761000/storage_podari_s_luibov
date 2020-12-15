@@ -3,7 +3,6 @@ from django.db import models
 
 from warehouse.forms.common import DisabledFormMixin
 from warehouse.models import Product, ProductAdditionalInformation
-from warehouse.validators import positive_number
 
 
 class ProductForm(forms.ModelForm):
@@ -24,6 +23,7 @@ class ProductAdditionalInformationForm(forms.ModelForm):
     class Meta:
         model = ProductAdditionalInformation
         fields = '__all__'
+        exclude = ['product']
 
 
 class DeleteProductForm(ProductForm, DisabledFormMixin):

@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic as views
-from django.views.generic import FormView, CreateView
+from django.views.generic import FormView, CreateView, TemplateView
 from django.contrib.auth import mixins as auth_mixins
 
 from accounts.decorators import user_required, superuser_required
@@ -16,14 +16,33 @@ from warehouse.views.common import calculate_quantity_and_price
 
 
 @method_decorator(login_required, name='dispatch')
-class ProductCreateView(FormView):
-    form_class = ProductForm
+class ProductCreateView(TemplateView):
     template_name = 'product/product-create.html'
-    success_url = reverse_lazy('list product')
 
-    def form_valid(self, form):
-        form.save()
-        return super().form_valid(form)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['form'] = ProductForm()
+        context['quantity_form'] = ProductAdditionalInformationForm()
+        return context
+
+    def post(self, request):
+        form = ProductForm(request.POST, request.FILES)
+        quantity_form = ProductAdditionalInformationForm(request.POST)
+
+        if form.is_valid() and quantity_form.is_valid():
+            product = form.save()
+            quantity = quantity_form.save(commit=False)
+            quantity.product = product
+            quantity.save()
+
+            return redirect('list product')
+
+        context = {
+            'form': ProductForm(),
+            'quantity_form': ProductAdditionalInformationForm(),
+        }
+        return render(request, 'index.html', context)
 
 
 @method_decorator(login_required, name='dispatch')
@@ -58,7 +77,7 @@ def details_product(request, pk):
     product = Product.objects.get(pk=pk)
     quantities = ProductAdditionalInformation.objects.all()
 
-    product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.product_code, product, quantities)
+    product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.id, product, quantities)
 
     context = {
         'product': product,
@@ -78,7 +97,7 @@ def list_product(request):
 
     for product in products:
         quantities = ProductAdditionalInformation.objects.all()
-        product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.product_code, product, quantities)
+        product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.id, product, quantities)
 
     items_per_page = 6
     paginator = Paginator(products, items_per_page)
@@ -118,7 +137,7 @@ def list_product(request):
 # @superuser_required()
 def add_quantity_product(request, pk):
     product = Product.objects.get(pk=pk)
-    pr_code = product.product_code
+
     if request.method == 'GET':
         context = {
             'product': product,
@@ -130,7 +149,7 @@ def add_quantity_product(request, pk):
 
         if form_quantity.is_valid():
 
-            quantity = form_quantity.save()
+            quantity = form_quantity.save(commit=False)
             quantity.product = product
             form_quantity.save()
             return redirect('list product')

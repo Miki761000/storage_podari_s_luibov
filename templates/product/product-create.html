@@ -10,7 +10,7 @@
 
                 <label for="product_type">Category: </label>
                 <span class="input">
-                {{ form.product_type}}
+                {{ form.product_type }}
                 </span>
 
                 <label for="product_code">{{ form.product_code.label }}: </label>
@@ -28,10 +28,45 @@
                 <label for="product_description">{{ form.product_description.label }}: </label>
                 <span class="input">
                     <input type="text" name="product_description" id="product_description"
-                              placeholder="Write description.." ></textarea>
+                           placeholder="Write description.."></textarea>
                     <span class="actions"></span>
                 </span>
+                {#                {{ quantity_form }}#}
+                <div class="quantity">
+            <p><b>Increase Quantity:</b></p>
+            <div class="add-quantity">
+                <div class="name-quantity">
+                    <label for="product_quantity_add">Delivered: </label>
+                </div>
+                <span class="input1">{{ quantity_form.product_quantity_add }}</span>
 
+                <div class="name-quantity">
+                    <label for="product_quantity_returned">Returned : </label>
+                </div>
+                <input type="number" name="product_quantity_returned" id="product_quantity_returned" value="0"
+                       readonly/>
+            </div>
+            <div>
+                <div class="add-quantity">
+                    <div class="name-quantity">
+                        <label for="product_delivery_price_add">Add Delivery Price: </label>
+                    </div>
+                    <span class="input1">{{ quantity_form.product_delivery_price_add }}</span>
+                </div>
+            </div>
+            <p><b>Decrease Quantity:</b></p>
+            <div class="sale-quantity">
+                <div class="name-quantity">
+                    <label for="product_quantity_sale">Add Sales: </label>
+                </div>
+                <input type="number" name="product_quantity_sale" id="product_quantity_sale" value="0" readonly/>
+
+                <div class="name-quantity">
+                    <label for="product_quantity_waste">Add Waste: </label>
+                </div>
+                <input type="number" name="product_quantity_waste" id="product_quantity_waste" value="0" readonly/>
+            </div>
+            </div>
             <p class="pic">
                 {{ form.product_image.label }}:
             </p>

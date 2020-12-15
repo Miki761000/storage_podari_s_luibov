@@ -8,15 +8,9 @@
             <legend>Change Quantity of Product</legend>
             {% csrf_token %}
             <p class="field1">
-                <label for="product">Product: </label>
-                <span class="input">
-                    {{ form_quantity.product }}
-                </span>
-                <label for="product_code">Product Code: </label>
-                <span class="input">
-                    <input type="text" name="product_code" id="product_code">
-                    <span class="actions"></span>
-                </span>
+                <label for="product_id">Product ID: {{ product.id }}</label>
+                <label for="product">Product Code: {{ product.product_code }}</label>
+
                 <label for="document">Document: </label>
                 <span class="input">
                     <input type="text" name="document" id="document">
