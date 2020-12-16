@@ -1,0 +1,38 @@
+{% extends 'shared/site.html' %}
+{% load static %}
+
+{% block site_content %}
+    <h2 class="">Product's quantities {{ quantities }} </h2>
+    {% if not quantities %}
+        <p>No orders</p>
+    {% else %}
+        {% include 'partials/paging.html' %}
+        <table>
+            <tr>
+                <th>Product Code</th>
+                <th>Product Name</th>
+                <th>Date</th>
+                <th>Document</th>
+                <th>Delivered</th>
+                <th>Returned</th>
+                <th>Delivery Price</th>
+                <th>Sales</th>
+                <th>Waste</th>
+            </tr>
+            {% for quantity in quantities|dictsortreversed:'product_add_date'  %}
+                <tr>
+                    <th>{{ quantity.product.product_code }}</th>
+                    <th>{{ quantity.product.product_name }}</th>
+                    <th>{{ quantity.product_add_date }}</th>
+                    <th>{{ quantity.document }} </th>
+                    <th>{{ quantity.product_quantity_add }}</th>
+                    <th>{{ quantity.product_quantity_returned }} </th>
+                    <th>{{ quantity.product_delivery_price_add }} </th>
+                    <th>{{ quantity.product_quantity_sale }} </th>
+                    <th>{{ quantity.product_quantity_waste }} </th>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    </div>
+{% endblock %}

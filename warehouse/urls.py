@@ -4,7 +4,7 @@ from warehouse.views.index import IndexPage
 from warehouse.views.category import CategoryCreateView, DeleteCategoryView, \
     UpdateCategoryView, CategoryListView, details_category
 from warehouse.views.products import ProductCreateView, DeleteProductView, UpdateProductView, \
-    add_quantity_product, details_product, list_product
+    add_quantity_product, details_product, list_product, reports_quantites, orders_by_quantites
 
 urlpatterns = [
     path('', IndexPage.as_view(), name='index'),
@@ -22,6 +22,8 @@ urlpatterns = [
     path('product/delete/<int:pk>/', DeleteProductView.as_view(), name='delete product'),
     path('product/details/<int:pk>/', details_product, name='details product'),
     path('add_quantity_product/<int:pk>/', add_quantity_product, name='add quantity product'),
+    path('product/report-products-quantities/', reports_quantites , name='reports product'),
+    path('product/report-products-quantities/<int:pk>/', orders_by_quantites , name='orders quantites'),
 
     # path('', index, name='index'),
     # path('resources_private/<path:path_to_file>/', get_private_file, name='private file'),

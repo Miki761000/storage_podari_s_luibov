@@ -1,0 +1,31 @@
+{% extends 'shared/site.html' %}
+{% load static %}
+
+{% block site_content %}
+    <h2 class="">Product's quantities: {{ products }}</h2>
+    {% if not products %}
+        <p>No products</p>
+    {% else %}
+        {% include 'partials/paging.html' %}
+        <table>
+            <tr>
+                {#                <th>Category</th>#}
+                <th>Product Code</th>
+                <th>Product Name</th>
+                <th>Available Quantity</th>
+                <th>Average delivery price</th>
+            </tr>
+
+            {% for product in products|dictsort:'product_quantity' %}
+                <tr>
+                    {#                    <th>{{ product.product_type }} </th>#}
+                    <th><a href="{% url 'orders quantites' product.id %}">{{ product.product_code }}</a></th>
+                    <th>{{ product.product_name }} </th>
+                    <th class="table-right">{{ product.product_quantity }}</th>
+                    <th class="table-right">{{ product.product_delivery_price }} </th>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+    </div>
+{% endblock %}

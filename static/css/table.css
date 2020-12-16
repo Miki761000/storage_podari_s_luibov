@@ -1,0 +1,13 @@
+table {
+    width: 90%;
+    margin: 0.5em auto;
+
+}
+
+table, th, tr {
+    border: 1px solid var(--color-main-bgrd-special);
+}
+
+th, tr {
+    text-align: center;
+}

@@ -22,8 +22,8 @@ class ProductForm(forms.ModelForm):
 class ProductAdditionalInformationForm(forms.ModelForm):
     class Meta:
         model = ProductAdditionalInformation
-        fields = '__all__'
         exclude = ['product']
+        fields = '__all__'
 
 
 class DeleteProductForm(ProductForm, DisabledFormMixin):

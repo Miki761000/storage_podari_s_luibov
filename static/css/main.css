@@ -6,6 +6,7 @@
 @import url('header_and_footer.css');
 @import url('navigation.css');
 @import url('carusel.css');
+@import url('table.css');
 
 body {
     min-height: 100vh;

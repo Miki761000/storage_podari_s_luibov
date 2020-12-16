@@ -46,19 +46,17 @@
                     <li><a href="/">Home</a></li>
                     <li><a href="{% url 'list product' %}">Products</a>
                         <ul>
-                            <li><a href="{% url 'list product' %}">List of products</a></li>
                             <li><a href="{% url 'create product' %}">Create new product</a></li>
                         </ul>
                     <li><a href="{% url 'list category' %}">Categories</a>
                         <ul>
-                            <li><a href="{% url 'list category' %}">List of categories</a></li>
                             <li><a href="{% url 'create category' %}">Create new category</a></li>
                         </ul>
                     </li>
                     </li>
-{#                    <li><a href="#">Reports</a>#}
-{##}
-{#                    </li>#}
+                    <li><a href="{% url 'reports product' %}">Reports</a>
+
+                    </li>
                 </ul>
             </nav>
         </div>

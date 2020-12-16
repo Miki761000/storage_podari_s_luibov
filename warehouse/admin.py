@@ -13,12 +13,9 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ('product_type',)
 
 
-class ProductAdditionalInformationAdmin(ProductAdmin):
+class ProductAdditionalInformationAdmin(admin.ModelAdmin):
     list_display = ('product_id', 'id', 'product_quantity_add', 'product_quantity_returned', 'product_quantity_sale',
                     'product_quantity_waste', 'product_delivery_price_add', 'product_add_date', 'document',)
-    list_filter = (
-    'product_quantity_add', 'product_quantity_returned', 'product_quantity_sale', 'product_quantity_waste',
-    'product_delivery_price_add', 'product_add_date',)
 
 
 admin.site.register(Category, CategoryAdmin)

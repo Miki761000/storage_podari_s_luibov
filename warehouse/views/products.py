@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views import generic as views
-from django.views.generic import FormView, CreateView, TemplateView
+from django.views.generic import FormView, CreateView, TemplateView, ListView
 from django.contrib.auth import mixins as auth_mixins
 
 from accounts.decorators import user_required, superuser_required
@@ -161,6 +161,70 @@ def add_quantity_product(request, pk):
 
     return render(request, 'product/product-add-quantity.html', context)
 
+
+@login_required
+def reports_quantites(request):
+    products = Product.objects.all()
+
+    for product in products:
+        quantities = ProductAdditionalInformation.objects.all()
+        product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.id, product, quantities)
+
+    items_per_page = 100
+    paginator = Paginator(products, items_per_page)
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    try:
+        products = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        products = paginator.page(1)
+
+    index = products.number - 1
+    max_index = len(paginator.page_range)
+    start_index = index - 3 if index >= 3 else 0
+    end_index = index + 3 if index <= max_index - 3 else max_index
+    page_range = list(paginator.page_range)[start_index:end_index]
+
+    context = {
+        'products': products,
+        'page_range': page_range,
+    }
+
+    return render(request, 'product/report-products-quantities.html', context)
+
+
+def orders_by_quantites(request, pk):
+    quantities = ProductAdditionalInformation.objects.filter(product_id=pk)
+
+    items_per_page = 100
+    paginator = Paginator(quantities, items_per_page)
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    try:
+        quantities = paginator.page(page)
+    except(EmptyPage, InvalidPage):
+        quantities = paginator.page(1)
+
+    index = quantities.number - 1
+    max_index = len(paginator.page_range)
+    start_index = index - 3 if index >= 3 else 0
+    end_index = index + 3 if index <= max_index - 3 else max_index
+    page_range = list(paginator.page_range)[start_index:end_index]
+
+    context = {
+        'quantities': quantities,
+        'page_range': page_range,
+    }
+
+    return render(request, 'product/orders-list.html', context)
 
 
 # @login_required
