@@ -15,8 +15,12 @@ Signed in users:
 - have functionality to manage categories and products - CRU;
 - have functionality to manage increase and decrease of quantities with their delivery price;
 - can see current quantities and average delivery price;
-- only superuser have rights to delete products - CRUD;
-- only superuser can reach admin panel.
+- to launch reports for products and orders
+
+Only admin have rights to:
+- delete products and categories - CRUD;
+- only superuser can reach admin panel;
+
 
 # Built With
 Django (https://docs.djangoproject.com/en/3.1/)

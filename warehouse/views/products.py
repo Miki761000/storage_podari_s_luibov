@@ -99,6 +99,7 @@ def list_product(request):
         quantities = ProductAdditionalInformation.objects.all()
         product.product_quantity, product.product_delivery_price = calculate_quantity_and_price(product.id, product, quantities)
 
+
     items_per_page = 6
     paginator = Paginator(products, items_per_page)
 
@@ -197,6 +198,7 @@ def reports_quantites(request):
     return render(request, 'product/report-products-quantities.html', context)
 
 
+@login_required
 def orders_by_quantites(request, pk):
     quantities = ProductAdditionalInformation.objects.filter(product_id=pk)
 
