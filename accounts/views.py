@@ -6,6 +6,7 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views.generic import TemplateView
+from django.db import transaction
 
 from accounts.forms import UserProfileForm, SignUpForm
 from accounts.models import UserProfile
@@ -46,17 +47,19 @@ class SignInView(auth_views.LoginView):
 
 class RegisterView(TemplateView):
     template_name = 'accounts/signup.html'
+    success_message = 'Great! You are already registered.'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
         context['user_form'] = SignUpForm()
         context['profile_form'] = UserProfileForm()
         return context
 
+    @transaction.atomic
     def post(self, request):
         user_form = SignUpForm(request.POST)
         profile_form = UserProfileForm(request.POST, request.FILES)
+
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             profile = profile_form.save(commit=False)
@@ -70,7 +73,8 @@ class RegisterView(TemplateView):
             'user_form': SignUpForm(),
             'profile_form': UserProfileForm(),
         }
-        return render(request, 'index.html', context)
+
+        return render(request, 'accounts/signup.html', context)
 
 
 class SignOutView(auth_views.LogoutView):

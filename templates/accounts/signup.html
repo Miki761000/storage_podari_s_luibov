@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block site_content %}
-    <form class="login" style="" method="post" enctype="multipart/form-data">
+    <form class="login" action="{% url 'signup user' %}"
+          method="post" enctype="multipart/form-data">
         <fieldset>
             <legend>Registration Form</legend>
             {% csrf_token %}
@@ -15,50 +16,53 @@
                             <span class="actions"></span>
                             <i class="fas fa-user"></i>
                         </span>
-                        {% if field.help_text %}
-                            <div class="help_text">
-                                <small>{{ field.help_text }}</small>
-                            </div>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <div class="error">
-                                {{ error }}
-                            </div>
-                        {% endfor %}
+                        <div class="help_text">
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                        <div class="error">
+                            {{ field.errors }}
+                            {% if field.non_field_errors %}
+                                {% for error in form.non_field_errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     {% elif field.name == 'first_name' %}
                         <label for="first_name">First Name: </label>
                         <span class="input">
-                            <input type="text" name="first_name" id="first_name" >
+                            <input type="text" name="first_name" id="first_name">
                             <span class="actions"></span>
                             <i class="fas fa-user"></i>
                         </span>
-                        {% if field.help_text %}
-                            <div class="help_text">
-                                <small>{{ field.help_text }}</small>
-                            </div>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <div class="error">
-                                {{ error }}
-                            </div>
-                        {% endfor %}
+                        <div class="help_text">
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                        <div class="error">
+                            {{ field.errors }}
+                            {% if field.non_field_errors %}
+                                {% for error in form.non_field_errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     {% elif field.name == 'last_name' %}
                         <label for="last_name">Last Name: </label>
                         <span class="input">
-                            <input type="text" name="last_name" id="last_name" >
+                            <input type="text" name="last_name" id="last_name">
                             <span class="actions"></span>
                             <i class="fas fa-user"></i>
                         </span>
-                        {% if field.help_text %}
-                            <div class="help_text">
-                                <small>{{ field.help_text }}</small>
-                            </div>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <div class="error">
-                                {{ error }}
-                            </div>
-                        {% endfor %}
+                        <div class="help_text">
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                        <div class="error">
+                            {{ field.errors }}
+                            {% if field.non_field_errors %}
+                                {% for error in form.non_field_errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     {% elif field.name == 'email' %}
                         <label for="email">E-mail</label>
                         <span class="input">
@@ -66,16 +70,17 @@
                             <span class="actions"></span>
                             <i class="fas fa-envelope"></i>
                         </span>
-                        {% if field.help_text %}
-                            <div class="help_text">
-                                <small>{{ field.help_text }}</small>
-                            </div>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <div class="error">
-                                {{ error }}
-                            </div>
-                        {% endfor %}
+                        <div class="help_text">
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                        <div class="error">
+                            {{ field.errors }}
+                            {% if field.non_field_errors %}
+                                {% for error in form.non_field_errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     {% elif field.name == 'password1' %}
                         <label for="password1">Password: </label>
                         <span class="input">
@@ -83,16 +88,17 @@
                             <span class="actions"></span>
                             <i class="fas fa-key"></i>
                         </span>
-                        {% if field.help_text %}
-                            <div class="help_text">
-                                <small>{{ field.help_text }}</small>
-                            </div>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <div class="error">
-                                {{ error }}
-                            </div>
-                        {% endfor %}
+                        <div class="help_text">
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                        <div class="error">
+                            {{ field.errors }}
+                            {% if field.non_field_errors %}
+                                {% for error in form.non_field_errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     {% elif field.name == 'password2' %}
                         <label for="password2">Password confirmation: </label>
                         <span class="input">
@@ -100,24 +106,26 @@
                             <span class="actions"></span>
                             <i class="fas fa-key"></i>
                         </span>
-                        {% if field.help_text %}
-                            <div class="help_text">
-                                <small>{{ field.help_text }}</small>
-                            </div>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <div class="error">
-                                {{ error }}
-                            </div>
-                        {% endfor %}
+                        <div class="help_text">
+                            <small>{{ field.help_text }}</small>
+                        </div>
+                        <div class="error">
+                            {{ field.errors }}
+                            {% if field.non_field_errors %}
+                                {% for error in form.non_field_errors %}
+                                    <p class="text-danger">{{ error }}</p>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
                     {% endif %}
                 {% endfor %}
 
             <div class="upload_pic">
-            <p>Profile picture:</p>
-                {% for field in profile_form %}
+                <p>Profile picture:</p>
+                {% for field_ in profile_form %}
                     {% csrf_token %}
-                    {{ field }}
+                    {{ field_ }}
+                    {{ field_.errors }}
                 {% endfor %}
             </div>
             </p>
