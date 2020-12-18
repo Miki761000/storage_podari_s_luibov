@@ -47,7 +47,6 @@ class SignInView(auth_views.LoginView):
 
 class RegisterView(TemplateView):
     template_name = 'accounts/signup.html'
-    success_message = 'Great! You are already registered.'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -70,8 +69,8 @@ class RegisterView(TemplateView):
             return redirect('index')
 
         context = {
-            'user_form': SignUpForm(),
-            'profile_form': UserProfileForm(),
+            'user_form': user_form,
+            'profile_form': profile_form,
         }
 
         return render(request, 'accounts/signup.html', context)
